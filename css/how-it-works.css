@@ -1,0 +1,121 @@
+/* Video Section */
+.video-section {
+    padding: 4rem 0;
+    background: #0A192F;
+}
+
+.video-wrapper {
+    position: relative;
+    padding-bottom: 56.25%; /* 16:9 Aspect Ratio */
+    height: 0;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.video-wrapper iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Device Compatibility */
+.device-compatibility {
+    padding: 4rem 0;
+    background: #ffffff;
+}
+
+.compatibility-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 2rem;
+    margin: 2rem 0;
+}
+
+.can-unlock, .cannot-unlock {
+    padding: 2rem;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.can-unlock {
+    background: #f0f9ff;
+    border: 1px solid #93c5fd;
+}
+
+.cannot-unlock {
+    background: #fff1f2;
+    border: 1px solid #fecdd3;
+}
+
+/* Unlocking Services */
+.unlocking-services {
+    padding: 4rem 0;
+    background: #0A192F;
+    color: white;
+}
+
+.services-comparison {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 2rem;
+    margin: 2rem 0;
+}
+
+.official-service, .unofficial-service {
+    padding: 2rem;
+    border-radius: 8px;
+    background: rgba(255, 255, 255, 0.1);
+}
+
+/* FAQ Section */
+.faq-section {
+    padding: 4rem 0;
+    background: #ffffff;
+}
+
+.faq-grid {
+    display: grid;
+    gap: 1rem;
+    max-width: 800px;
+    margin: 2rem auto;
+}
+
+details {
+    background: #f8fafc;
+    padding: 1rem;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+summary {
+    font-weight: 600;
+    margin: -1rem;
+    padding: 1rem;
+}
+
+details[open] summary {
+    margin-bottom: 1rem;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .video-section,
+    .device-compatibility,
+    .unlocking-services,
+    .faq-section {
+        padding: 2rem 0;
+    }
+
+    .compatibility-grid,
+    .services-comparison {
+        grid-template-columns: 1fr;
+    }
+
+    .container {
+        padding: 0 1rem;
+    }
+}
