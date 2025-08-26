@@ -1128,10 +1128,16 @@ function initImeiChecker() {
                         <i class="fas fa-check-circle"></i>
                     </div>
                     <h3>Request Submitted Successfully!</h3>
-                    <p>Your phone's status will be emailed to you within 24 hours. For urgent inquiries, please click the WhatsApp button below.</p>
-                    <a href="https://wa.me/447401787614" class="btn btn-whatsapp" target="_blank">
-                        <i class="fab fa-whatsapp"></i> WhatsApp Support
-                    </a>
+                    <div class="email-notice">
+                        <p>Your phone's status report will be emailed to you within 24 hours.</p>
+                        <p><strong>Please check your spam/junk folder</strong> if you don't see our email in your inbox.</p>
+                    </div>
+                    <div class="urgent-support">
+                        <p>Need urgent assistance? Contact us directly through WhatsApp:</p>
+                        <a href="https://wa.me/447401787614" class="btn btn-whatsapp" target="_blank">
+                            <i class="fab fa-whatsapp"></i> Chat with Support Now
+                        </a>
+                    </div>
                 </div>
             </div>
         `;
