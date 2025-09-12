@@ -1268,9 +1268,14 @@ function showInputError(input, message) {
  * @returns {Promise} - Promise that resolves when data is sent
  */
 function sendToGoogleSheets(imei, email) {
-    // Get current timestamp
+    // Get current date
     const now = new Date();
-    const timestamp = now.toLocaleString();
+    const date = now.toLocaleDateString('en-US', {
+        year: 'numeric',
+        month: '2-digit',
+        day: '2-digit'
+    });
+    const timestamp = date;
 
     // Google Apps Script Web App URL
     const scriptUrl = 'https://script.google.com/macros/s/AKfycbyfQnMgtLkQWRvYmRiibvg8frKDLbVT8KRFZo8f6bve6OAelKKQd4LLAZKdoIizw8I/exec';
