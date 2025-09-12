@@ -1199,8 +1199,8 @@ function initImeiChecker() {
                 checkImeiBtn.disabled = true;
                 checkImeiBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Processing...';
                 
-                // Send notification to Telegram
-                sendTelegramNotification(imei, email)
+                // Send data to Google Sheets
+                sendToGoogleSheets(imei, email)
                     .then(() => {
                         // Show success message
                         imeiForm.style.display = 'none';
@@ -1215,15 +1215,10 @@ function initImeiChecker() {
                         checkImeiBtn.innerHTML = originalBtnText;
                     })
                     .catch(error => {
-                        console.error('Error sending notification:', error);
+                        console.error('Error sending data to Google Sheets:', error);
                         
-                        // Show success message anyway (fallback)
-                        imeiForm.style.display = 'none';
-                        imeiSuccess.style.display = 'block';
-                        
-                        // Reset form
-                        imeiInput.value = '';
-                        emailInput.value = '';
+                        // Show error message to user
+                        alert('An error occurred. Please try again later.');
                         
                         // Reset button
                         checkImeiBtn.disabled = false;
@@ -1267,49 +1262,44 @@ function showInputError(input, message) {
 }
 
 /**
- * Send notification to Telegram bot
+ * Send data to Google Sheets
  * @param {string} imei - IMEI number
  * @param {string} email - Email address
- * @returns {Promise} - Promise that resolves when notification is sent
+ * @returns {Promise} - Promise that resolves when data is sent
  */
-function sendTelegramNotification(imei, email) {
+function sendToGoogleSheets(imei, email) {
     // Get current timestamp
     const now = new Date();
     const timestamp = now.toLocaleString();
-    
-    // Telegram bot token and chat ID
-    const botToken = '8317723769:AAEMi7usRfjljzxs4v7DMCdz0s098UXnkI4';
-    const chatId = '7413443284';
-    
-    // Message text
-    const message = `
-🔔 New IMEI Check Request!
-📱 IMEI: ${imei}
-📧 Email: ${email}
-⏰ Time: ${timestamp}
-🌐 Website: IFIX CLOUD
-`;
-    
-    // Telegram API URL
-    const telegramUrl = `https://api.telegram.org/bot${botToken}/sendMessage`;
-    
-    // Send notification to Telegram
-    return fetch(telegramUrl, {
+
+    // Google Apps Script Web App URL
+    const scriptUrl = 'https://script.google.com/macros/s/AKfycbyfQnMgtLkQWRvYmRiibvg8frKDLbVT8KRFZo8f6bve6OAelKKQd4LLAZKdoIizw8I/exec';
+
+    // Prepare the data
+    const data = {
+        timestamp: timestamp,
+        imei: imei,
+        email: email,
+        website: 'IFIX CLOUD'
+    };
+
+    // Send data to Google Sheets via Google Apps Script
+    return fetch(scriptUrl, {
         method: 'POST',
+        mode: 'no-cors', // Required for Google Apps Script
         headers: {
-            'Content-Type': 'application/json',
+            'Content-Type': 'application/json'
         },
-        body: JSON.stringify({
-            chat_id: chatId,
-            text: message,
-            parse_mode: 'HTML'
-        })
+        body: JSON.stringify(data)
     })
     .then(response => {
-        if (!response.ok) {
-            throw new Error('Failed to send Telegram notification');
-        }
-        return response.json();
+        // Since mode is 'no-cors', we can't access the response
+        // We'll assume success if the request didn't throw an error
+        return { success: true };
+    })
+    .catch(error => {
+        console.error('Error sending data to Google Sheets:', error);
+        throw new Error('Failed to send data to Google Sheets');
     });
 }
 
