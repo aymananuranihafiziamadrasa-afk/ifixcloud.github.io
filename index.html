@@ -1,444 +1,2885 @@
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="cryptomus" content="b88f6c90" />
-    <title>IFIX CLOUD - Professional iPhone Unlocking Services</title>
-    <meta name="description" content="Fast, secure, and reliable iPhone iCloud and carrier unlocking services with a 99.8% success rate.">
-    <link rel="stylesheet" href="css/styles.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <title>iFix Cloud - iPhone Unlock Service</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts: Inter -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Icon Library (Phosphor Icons) -->
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+    <style>
+        /* Custom Styles */
+        html { scroll-behavior: smooth; }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #050505;
+            color: #e5e5e5;
+            min-height: 100vh;
+            position: relative;
+        }
+
+        .gradient-background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+            overflow: hidden;
+        }
+
+        .gradient-sphere {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(60px);
+        }
+
+        .sphere-1 {
+            width: 40vw;
+            height: 40vw;
+            background: linear-gradient(40deg, rgba(255, 0, 128, 0.8), rgba(255, 102, 0, 0.4));
+            top: -10%;
+            left: -10%;
+            animation: float-1 15s ease-in-out infinite alternate;
+        }
+
+        .sphere-2 {
+            width: 45vw;
+            height: 45vw;
+            background: linear-gradient(240deg, rgba(72, 0, 255, 0.8), rgba(0, 183, 255, 0.4));
+            bottom: -20%;
+            right: -10%;
+            animation: float-2 18s ease-in-out infinite alternate;
+        }
+
+        .sphere-3 {
+            width: 30vw;
+            height: 30vw;
+            background: linear-gradient(120deg, rgba(133, 89, 255, 0.5), rgba(98, 216, 249, 0.3));
+            top: 60%;
+            left: 20%;
+            animation: float-3 20s ease-in-out infinite alternate;
+        }
+
+        @keyframes float-1 {
+            0% { transform: translate(0, 0) scale(1); }
+            100% { transform: translate(10%, 10%) scale(1.1); }
+        }
+
+        @keyframes float-2 {
+            0% { transform: translate(0, 0) scale(1); }
+            100% { transform: translate(-10%, -5%) scale(1.15); }
+        }
+
+        @keyframes float-3 {
+            0% { transform: translate(0, 0) scale(1); opacity: 0.3; }
+            100% { transform: translate(-5%, 10%) scale(1.05); opacity: 0.6; }
+        }
+
+        .grid-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-size: 40px 40px;
+            background-image: 
+                linear-gradient(to right, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+            z-index: 2;
+        }
+
+        .particles-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 3;
+            pointer-events: none;
+        }
+
+        .particle {
+            position: absolute;
+            background: white;
+            border-radius: 50%;
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .noise-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0.05;
+            z-index: 5;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+        }
+
+        #user-website {
+            position: relative;
+            z-index: 10;
+        }
+        
+        /* Admin Panel Background Override */
+        #admin-panel {
+            position: relative;
+            z-index: 20;
+            background-color: #050505;
+        }
+        
+        
+        #admin-panel .gradient-background,
+        #admin-panel .grid-overlay,
+        #admin-panel .particles-container,
+        #admin-panel .noise-overlay {
+            display: none;
+        }
+        .glass-card {
+            background: rgba(23, 23, 23, 0.6); /* Semi-transparent dark */
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 1rem; /* Rounded corners */
+        }
+        .modal-backdrop {
+            background-color: rgba(0, 0, 0, 0.7);
+            backdrop-filter: blur(5px);
+        }
+        .btn-primary {
+            background: linear-gradient(90deg, #007cf0, #00dfd8);
+            color: white;
+            transition: all 0.3s ease, transform 0.3s ease;
+        }
+        .btn-primary:hover {
+            opacity: 0.9;
+            box-shadow: 0 0 15px rgba(0, 223, 216, 0.5);
+        }
+        .btn-primary:disabled {
+            background: #4b5563;
+            opacity: 0.7;
+            cursor: not-allowed;
+            box-shadow: none;
+        }
+        .btn-secondary {
+            background-color: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: #e5e5e5;
+            transition: all 0.3s ease;
+        }
+        .btn-secondary:hover {
+            background-color: rgba(255, 255, 255, 0.2);
+        }
+        .form-input {
+            background-color: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 0.5rem;
+            color: white;
+        }
+        .form-input:focus {
+            outline: none;
+            border-color: #007cf0;
+            box-shadow: 0 0 0 2px rgba(0, 124, 240, 0.5);
+        }
+        /* Style for <select> dropdown arrow */
+        select.form-input {
+            appearance: none;
+            background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%239ca3af' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M6 8l4 4 4-4'/%3e%3c/svg%3e");
+            background-position: right 0.5rem center;
+            background-repeat: no-repeat;
+            background-size: 1.5em 1.5em;
+            padding-right: 2.5rem;
+        }
+        .nav-link {
+            transition: color 0.3s;
+            cursor: pointer;
+        }
+        .nav-link:hover {
+            color: #00dfd8;
+        }
+        ::-webkit-scrollbar { width: 0; height: 0; } /* Hide scrollbar */
+        .modal { transition: opacity 0.3s ease, transform 0.3s ease; }
+        .modal-hidden { opacity: 0; transform: scale(0.95) translateY(-20px); pointer-events: none; }
+        .modal-visible { opacity: 1; transform: scale(1) translateY(0); pointer-events: auto; }
+        
+        .star-rating {
+            direction: rtl; 
+        }
+        .star-rating input[type="radio"] {
+            display: none;
+        }
+        .star-rating label {
+            color: #4b5563; 
+            font-size: 2.25rem;
+            cursor: pointer;
+            transition: color 0.2s;
+        }
+        .star-rating input:checked ~ label,
+        .star-rating:not(:checked) > label:hover,
+        .star-rating:not(:checked) > label:hover ~ label {
+            color: #facc15; /* yellow-400 */
+        }
+        
+        /* Floating WhatsApp Button */
+        .whatsapp-float {
+            position: fixed;
+            bottom: 25px;
+            right: 25px;
+            background-color: #25D366;
+            color: white;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 30px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+            z-index: 100;
+            animation: pulse 2s infinite;
+            transition: transform 0.3s ease;
+        }
+        .whatsapp-float:hover {
+            transform: scale(1.1);
+            animation: none;
+        }
+        @keyframes pulse {
+            0% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.7); }
+            70% { box-shadow: 0 0 0 15px rgba(37, 211, 102, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0); }
+        }
+        
+        /* Admin Panel Styles */
+        .admin-table {
+            width: 100%;
+            border-collapse: collapse;
+            min-width: 700px; /* Ensure minimum width for content */
+        }
+        
+        .admin-table th, .admin-table td {
+            padding: 0.75rem 1rem;
+            text-align: left;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .admin-table th {
+            background-color: rgba(0, 0, 0, 0.3);
+            font-weight: 600;
+            color: #00dfd8;
+            white-space: nowrap;
+        }
+        
+        .admin-table tbody tr:hover {
+            background-color: rgba(255, 255, 255, 0.05);
+        }
+        
+        .admin-table-container {
+            width: 100%;
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+            margin-bottom: 1rem;
+            border-radius: 0.5rem;
+            background: rgba(23, 23, 23, 0.6);
+            position: relative;
+            max-height: 60vh;
+            overflow-y: auto;
+        }
+
+        /* Mobile-friendly admin panel adjustments */
+        @media (max-width: 768px) {
+            #admin-panel .flex.flex-col.md\\:flex-row {
+                flex-direction: column !important;
+            }
+            
+            #admin-panel aside.w-full.md\\:w-1\/4 {
+                width: 100% !important;
+                margin-bottom: 1rem;
+            }
+            
+            #admin-panel section.w-full.md\\:w-3\/4 {
+                width: 100% !important;
+            }
+
+            .admin-table-container {
+                margin: 0 -1rem;
+                width: calc(100% + 2rem);
+                border-radius: 0;
+            }
+
+            .admin-table {
+                font-size: 0.875rem;
+            }
+
+            .admin-table th, .admin-table td {
+                padding: 0.5rem;
+            }
+
+            /* Make status buttons and inputs full width on mobile */
+            .admin-table select,
+            .admin-table button {
+                width: 100%;
+                min-width: 120px;
+                margin: 0.25rem 0;
+            }
+
+            /* Add horizontal scroll indicators */
+            .admin-table-container::after {
+                content: '';
+                position: absolute;
+                right: 0;
+                top: 0;
+                bottom: 0;
+                width: 20px;
+                background: linear-gradient(to right, transparent, rgba(0, 0, 0, 0.3));
+                pointer-events: none;
+            }
+        }
+
+        /* Add scroll hint for mobile users */
+        @media (max-width: 768px) {
+            .admin-table-container::before {
+                content: '← Scroll →';
+                position: absolute;
+                right: 1rem;
+                top: -1.5rem;
+                font-size: 0.75rem;
+                color: rgba(255, 255, 255, 0.5);
+            }
+        }
+
+        /* Duplicate Email Highlight */
+        .email-duplicate {
+            background-color: rgba(255, 0, 0, 0.1) !important;
+            color: #ef4444;
+            font-weight: bold;
+        }
+
+    </style>
 </head>
-<body>
-    <!-- Header Section -->
-    <header>
-        <div class="container">
-            <div class="logo">
-                <a href="/">
-                    <i class="fas fa-mobile-alt"></i> IFIX CLOUD
-                </a>
-            </div>
-            <nav>
-                <ul class="nav-links">
-                    <li><a href="/" class="active"><i class="fas fa-mobile-alt"></i> Home</a></li>
-                    <li><a href="services.html"><i class="fas fa-cogs"></i> Services</a></li>
-                    <li><a href="reviews.html"><i class="fas fa-star"></i> Reviews</a></li>
-                    <li><a href="about.html"><i class="fas fa-info-circle"></i> About</a></li>
-                    <li><a href="contact.html"><i class="fas fa-envelope"></i> Contact</a></li>
-                </ul>
+<body class="antialiased">
+    <!-- Animated Background -->
+    <div class="gradient-background">
+        <div class="gradient-sphere sphere-1"></div>
+        <div class="gradient-sphere sphere-2"></div>
+        <div class="gradient-sphere sphere-3"></div>
+    </div>
+    <div class="grid-overlay"></div>
+    <div class="particles-container" id="particles-container"></div>
+    <div class="noise-overlay"></div>
+
+    <!-- =========== USER WEBSITE (Default View) =========== -->
+    <div id="user-website">
+        <!-- Header -->
+        <header class="sticky top-0 z-50 glass-card border-b border-gray-800">
+            <nav class="container mx-auto px-4 sm:px-6 lg:px-8 py-2 flex justify-between items-center">
+                
+                <!-- (UPDATED) Mobile/Desktop Title -->
+                <a href="#" class="nav-home flex-shrink-0 flex items-center space-x-2 text-xl font-bold">
+    <span class="text-cyan-400">iFix Cloud</span>
+</a>
+                
+                <!-- ALL links removed as requested -->
+                <div class="hidden md:flex space-x-6 items-center">
+                    <!-- No navigation links here -->
+                </div>
+
+                <div id="logged-out-nav" class="flex space-x-3">
+                    <button id="login-btn" class="btn-secondary text-sm px-4 py-2 rounded-lg">Login</button>
+                    <button id="register-btn" class="btn-primary text-sm px-4 py-2 rounded-lg">Register</button>
+                </div>
+                <div id="logged-in-nav" class="hidden flex items-center justify-end space-x-2">
+                    <span id="user-balance-nav" class="text-xs sm:text-sm text-green-400 font-medium flex-shrink-0">Balance: $0.00</span>
+                    <div class="flex items-center space-x-2 flex-shrink-0">
+                        <button id="dashboard-btn" class="flex items-center space-x-2 btn-secondary p-2 sm:px-4 sm:py-2 rounded-lg">
+                            <i class="ph ph-user-circle text-lg"></i>
+                            <span class="hidden sm:inline">Dashboard</span>
+                        </button>
+                        <button id="logout-btn" class="flex items-center btn-secondary p-2 rounded-lg text-red-400 hover:bg-red-900/50">
+                            <i class="ph ph-sign-out text-lg"></i>
+                        </button>
+                    </div>
+                </div>
             </nav>
-            <div class="cta-button">
-                <a href="#unlock-form" class="btn btn-primary">Unlock</a>
-            </div>
-            <div class="hamburger">
-                <span></span>
-                <span></span>
-                <span></span>
-            </div>
-        </div>
-    </header>
+        </header>
 
-    <!-- Hero Section -->
-    <section class="hero">
-        <div class="container">
-            <div class="hero-content">
-                <div class="trust-badge">
-                    <i class="fas fa-check-circle"></i> Trusted by 50,000+ Customers
-                    <div class="rating">
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <span>4.9/5</span>
-                    </div>
-                </div>
-                
-                <h1>Professional iPhone Unlocking Services</h1>
-                <p>Fast, secure, and reliable iPhone iCloud and carrier unlocking services. Get your device unlocked in 24-48 hours with our money-back guarantee.</p>
-                
-                <div class="hero-buttons">
-                    <a href="#unlock-form" class="btn btn-primary btn-medium">
-                        Start Unlock Process <i class="fas fa-arrow-right"></i>
-                    </a>
-                    <a href="#imei-check-modal" class="btn btn-accent btn-medium" id="open-imei-check">
-                        IMEI Check <i class="fas fa-search"></i>
-                    </a>
-                    <a href="reviews.html" class="btn btn-secondary btn-medium">
-                        View Customer Reviews <i class="fas fa-star"></i>
-                    </a>
-                    <a href="how-it-works.html" class="btn btn-secondary btn-medium">
-                        How it Works <i class="fas fa-info-circle"></i>
-                    </a>
-                </div>
-            </div>
-            
-            <div class="hero-image">
-                <img src="images/iphone-pro.png" alt="iPhone Pro Max">
-                <div class="success-badge">
-                    <div class="badge-content">
-                        <i class="fas fa-check-circle"></i>
-                        <div class="badge-text">
-                            <span class="highlight">99.8% Success</span>
-                            <span class="subtext">Rate Guaranteed</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="time-badge">
-                    <div class="badge-content">
-                        <i class="fas fa-clock"></i>
-                        <div class="badge-text">
-                            <span class="highlight">24-48 Hours</span>
-                            <span class="subtext">Fast Processing</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+        <!-- Main Content (Page 1) -->
+        <div id="main-content">
+            <main class="container mx-auto px-4 sm:px-6 lg:px-8 py-12">
+                <!-- Hero Section -->
+                <section class="text-center py-10">
+                    <style>
+                        @keyframes glow {
+                            0% {
+                                text-shadow: 0 0 5px #ff005e, 0 0 10px #ff005e, 0 0 20px #ff005e, 0 0 40px #ff005e, 0 0 80px #ff005e;
+                            }
+                            100% {
+                                text-shadow: 0 0 10px #00d4ff, 0 0 20px #00d4ff, 0 0 40px #00d4ff, 0 0 80px #00d4ff, 0 0 160px #00d4ff;
+                            }
+                        }
+                    </style>
+                    <img src="ifix.png" alt="iFix Cloud Logo" class="mx-auto h-48 md:h-64 mb-4">
+                    <h1 class="text-4xl md:text-6xl font-bold text-white mb-4" style="animation: glow 1.5s infinite alternate;">
+                        Unlock Your iPhone
+                    </h1>
+                    <h2 class="text-2xl md:text-5xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-cyan-400 mb-6">
+                        Fast, Secure, Reliable.
+                    </h2>
+                    <p class="text-lg text-gray-400 max-w-2xl mx-auto mb-10">
+                        Professional iCloud, Carrier, and Passcode unlocking services for all iPhone models. Get your device unlocked today.
+                    </p>
 
-    <!-- Unlock Form Section -->
-    <section id="unlock-form" class="unlock-form">
-        <div class="container">
-            <h2>Start Your Unlock Process</h2>
-            <p>Enter your device details below to begin the unlocking process</p>
-            
-            <form id="unlock-form-element" class="form">
-                <div class="form-grid">
-                    <div class="form-group">
-                        <label for="imei">IMEI Number</label>
-                        <input type="text" id="imei" name="imei" placeholder="Enter 15-17 digit IMEI" maxlength="17" required>
-                        <small>Dial *#06# to find your IMEI</small>
-                    </div>
-                    
-                    <div class="form-group">
-                        <label for="model">iPhone Model</label>
-                        <select id="model" name="model" required>
-                            <option value="" disabled selected>Select your iPhone model</option>
-                            <option value="iphone-5s">iPhone 5S</option>
-                            <option value="iphone-6">iPhone 6</option>
-                            <option value="iphone-6-plus">iPhone 6 Plus</option>
-                            <option value="iphone-6s">iPhone 6S</option>
-                            <option value="iphone-6s-plus">iPhone 6S Plus</option>
-                            <option value="iphone-se-1">iPhone SE (1st gen)</option>
-                            <option value="iphone-7">iPhone 7</option>
-                            <option value="iphone-7-plus">iPhone 7 Plus</option>
-                            <option value="iphone-8">iPhone 8</option>
-                            <option value="iphone-8-plus">iPhone 8 Plus</option>
-                            <option value="iphone-x">iPhone X</option>
-                            <option value="iphone-xr">iPhone XR</option>
-                            <option value="iphone-xs">iPhone XS</option>
-                            <option value="iphone-xs-max">iPhone XS Max</option>
-                            <option value="iphone-se-2">iPhone SE (2nd gen)</option>
-                            <option value="iphone-11">iPhone 11</option>
-                            <option value="iphone-11-pro">iPhone 11 Pro</option>
-                            <option value="iphone-11-pro-max">iPhone 11 Pro Max</option>
-                            <option value="iphone-12-mini">iPhone 12 mini</option>
-                            <option value="iphone-12">iPhone 12</option>
-                            <option value="iphone-12-pro">iPhone 12 Pro</option>
-                            <option value="iphone-12-pro-max">iPhone 12 Pro Max</option>
-                            <option value="iphone-se-3">iPhone SE (3rd gen)</option>
-                            <option value="iphone-13-mini">iPhone 13 mini</option>
-                            <option value="iphone-13">iPhone 13</option>
-                            <option value="iphone-13-pro">iPhone 13 Pro</option>
-                            <option value="iphone-13-pro-max">iPhone 13 Pro Max</option>
-                            <option value="iphone-14">iPhone 14</option>
-                            <option value="iphone-14-plus">iPhone 14 Plus</option>
-                            <option value="iphone-14-pro">iPhone 14 Pro</option>
-                            <option value="iphone-14-pro-max">iPhone 14 Pro Max</option>
-                            <option value="iphone-15">iPhone 15</option>
-                            <option value="iphone-15-plus">iPhone 15 Plus</option>
-                            <option value="iphone-15-pro">iPhone 15 Pro</option>
-                            <option value="iphone-15-pro-max">iPhone 15 Pro Max</option>
-                            <option value="iphone-16">iPhone 16</option>
-                            <option value="iphone-16-plus">iPhone 16 Plus</option>
-                            <option value="iphone-16-pro">iPhone 16 Pro</option>
-                            <option value="iphone-16-pro-max">iPhone 16 Pro Max</option>
-                        </select>
-                    </div>
-                    
-                    <div class="form-group">
-                        <label for="service">Service Type</label>
-                        <select id="service" name="service" required>
-                            <option value="" disabled selected>Select service type</option>
-                            <option value="icloud">iCloud Unlock</option>
-                            <option value="carrier">Carrier Unlock</option>
-                            <option value="network">Network Unlock</option>
-                            <option value="passcode">Passcode Removal</option>
-                        </select>
-                    </div>
-                    
-                    <div class="form-group">
-                        <label for="email">Email Address</label>
-                        <input type="email" id="email" name="email" placeholder="Your email address" required>
-                    </div>
-                </div>
-                
-                <div class="form-submit">
-                    <button type="submit" class="btn btn-primary btn-large">Start Unlock</button>
-                </div>
-                
-                <div class="form-security">
-                    <i class="fas fa-lock"></i> Your information is secure and will not be shared
-                </div>
-            </form>
-        </div>
-    </section>
-
-    <!-- Stats Section -->
-    <section class="stats">
-        <div class="container">
-            <div class="stat-item">
-                <i class="fas fa-users"></i>
-                <h2>50,000+</h2>
-                <p>Happy Customers</p>
-            </div>
-            <div class="stat-item">
-                <i class="fas fa-star"></i>
-                <h2>4.9/5</h2>
-                <p>Customer Rating</p>
-            </div>
-            <div class="stat-item">
-                <i class="fas fa-check-circle"></i>
-                <h2>99.8%</h2>
-                <p>Success Rate</p>
-            </div>
-            <div class="stat-item">
-                <i class="fas fa-award"></i>
-                <h2>5 Years</h2>
-                <p>Experience</p>
-            </div>
-        </div>
-    </section>
-
-    <!-- How It Works -->
-    <section class="how-it-works">
-        <div class="container">
-            <h2>How Our Unlock Process Works</h2>
-            <div class="steps">
-                <div class="step">
-                    <div class="step-number">1</div>
-                    <h3>Submit Details</h3>
-                    <p>Enter your device IMEI and select the service you need</p>
-                </div>
-                <div class="step">
-                    <div class="step-number">2</div>
-                    <h3>Make Payment</h3>
-                    <p>Secure payment via Binance Pay</p>
-                </div>
-                <div class="step">
-                    <div class="step-number">3</div>
-                    <h3>Processing</h3>
-                    <p>We process your unlock request (24-48 hours)</p>
-                </div>
-                <div class="step">
-                    <div class="step-number">4</div>
-                    <h3>Unlock Complete</h3>
-                    <p>Receive confirmation and setup instructions</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Testimonials Section -->
-    <section class="testimonials">
-        <div class="container">
-            <h2>What Our Customers Say</h2>
-            <div class="testimonials-grid">
-                <div class="testimonial">
-                    <div class="testimonial-rating">
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                    </div>
-                    <p>"আমি Iphone 13 pro max আনলক করেছি IFix Cloud থেকে । উনাদের ব্যবহার এবং সার্ভিস খুব ভালো । আমার ফোনটি আমি দুবাই থেকে নিয়ে এসেছিলাম কিন্তু কোন কারণবশত ফোনটি লক হয়ে যায় । এখন আমি আমার ফোনটি অফিসিয়াল ভাবে আনলক করেছি ‌। আপনারা আই ফিক্স ক্লাউড থেকে সার্ভিস নিতে পারেন।❤️"</p>
-                    <div class="testimonial-author">
-                        <img src="images/user1.jpg" alt="Customer">
-                        <div class="author-info">
-                            <h4>MD. ROHMOT ALI</h4>
-                            <span>iPhone 13 Pro Max Unlock</span>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="testimonial">
-                    <div class="testimonial-rating">
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                    </div>
-                    <p>"iPhone 14 Pro Max unlock karwaya, aur mera anubhav bahut achha raha. Unki seva tez, bharosemand aur bilkul pareshani-mukt thi. Customer support bahut helpful tha aur unhone mere sabhi sawalon ka javab diya. Main iFix Cloud ko un logon ke liye recommend karta hoon jo professional iPhone unlocking services dhoondh rahe hain."</p>
-                    <div class="testimonial-author">
-                        <img src="images/user2.jpg" alt="Customer">
-                        <div class="author-info">
-                            <h4>Anika</h4>
-                            <span>iPhone 14 Pro Max Unlock</span>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="testimonial">
-                    <div class="testimonial-rating">
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star-half-alt"></i>
-                    </div>
-                    <p>"I recently used iFix Cloud to unlock my iPhone 16 Pro Max, and I'm extremely satisfied with their service. It was fast, reliable, and hassle-free. I highly recommend them to anyone looking for professional iPhone unlocking services!"</p>
-                    <div class="testimonial-author">
-                        <img src="images/user3.jpg" alt="Customer">
-                        <div class="author-info">
-                            <h4>Olivia</h4>
-                            <span>iPhone 16 Pro Max Unlock</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="testimonials-cta">
-                <a href="reviews.html" class="btn btn-secondary">View All Reviews</a>
-            </div>
-        </div>
-    </section>
-
-    <!-- CTA Section -->
-    <section class="cta-section">
-        <div class="container">
-            <h2>Ready to Unlock Your iPhone?</h2>
-            <p>Get started today and have your device unlocked within 24-48 hours</p>
-            <a href="#unlock-form" class="btn btn-primary btn-large">Start Unlock</a>
-        </div>
-    </section>
-
-    <!-- Connect With Us Section -->
-    <section class="connect-section">
-        <div class="container">
-            <h2>Connect With Us</h2>
-            <p>Follow us on social media for updates, tips, and special offers</p>
-            
-            <div class="social-connect-grid">
-                <a href="https://web.facebook.com/iSupportPro" class="social-connect-item social-row-1" target="_blank">
-                    <div class="social-connect-icon facebook">
-                        <i class="fab fa-facebook-f"></i>
-                    </div>
-                    <h3>Facebook</h3>
-                    <p>Follow our page for updates and offers</p>
-                </a>
-                
-                <a href="https://www.youtube.com/@ratulYThub" class="social-connect-item social-row-1" target="_blank">
-                    <div class="social-connect-icon youtube">
-                        <i class="fab fa-youtube"></i>
-                    </div>
-                    <h3>YouTube</h3>
-                    <p>Watch our detailed tutorials and guides</p>
-                </a>
-                
-                <a href="https://www.tiktok.com/@ifixcloud" class="social-connect-item social-row-2" target="_blank">
-                    <div class="social-connect-icon tiktok">
-                        <i class="fab fa-tiktok"></i>
-                    </div>
-                    <h3>TikTok</h3>
-                    <p>Watch our short videos and tutorials</p>
-                </a>
-                
-                <a href="https://www.instagram.com/ifixcloud/" class="social-connect-item social-row-2" target="_blank">
-                    <div class="social-connect-icon instagram">
-                        <i class="fab fa-instagram"></i>
-                    </div>
-                    <h3>Instagram</h3>
-                    <p>See our latest photos and stories</p>
-                </a>
-            </div>
-        </div>
-    </section>
-
-    <!-- Footer -->
-    <footer>
-        <div class="container">
-            <div class="footer-grid">
-                <div class="footer-logo">
-                    <a href="/">
-                        <i class="fas fa-mobile-alt"></i> IFIX CLOUD
-                    </a>
-                    <p>Professional iPhone unlocking services with a 99.8% success rate.</p>
-                    <div class="footer-social">
-                        <a href="https://web.facebook.com/iSupportPro" target="_blank" title="Facebook"><i class="fab fa-facebook"></i></a>
-                        <a href="https://www.instagram.com/ifixcloud/" target="_blank" title="Instagram"><i class="fab fa-instagram"></i></a>
-                        <a href="https://www.tiktok.com/@ifixcloud" target="_blank" title="TikTok"><i class="fab fa-tiktok"></i></a>
-                        <a href="https://www.youtube.com/@ratulYThub" target="_blank" title="YouTube"><i class="fab fa-youtube"></i></a>
-                        <a href="https://wa.me/+447401787614" target="_blank" title="WhatsApp"><i class="fab fa-whatsapp"></i></a>
-                    </div>
-                </div>
-                
-                <div class="footer-links">
-                    <h3>Quick Links</h3>
-                    <ul>
-                        <li><a href="index.html">Home</a></li>
-                        <li><a href="services.html">Services</a></li>
-                        <li><a href="reviews.html">Reviews</a></li>
-                        <li><a href="about.html">About Us</a></li>
-                        <li><a href="contact.html">Contact</a></li>
-                    </ul>
-                </div>
-                
-                <div class="footer-services">
-                    <h3>Our Services</h3>
-                    <ul>
-                        <li><a href="services.html#icloud">iCloud Unlock</a></li>
-                        <li><a href="services.html#carrier">Carrier Unlock</a></li>
-                        <li><a href="services.html#network">Network Unlock</a></li>
-                        <li><a href="services.html#passcode">Passcode Removal</a></li>
-                    </ul>
-                </div>
-                
-                <div class="footer-contact">
-                    <h3>Contact Us</h3>
-                    <p><i class="fas fa-envelope"></i> ifixcloud@ccmail.uk</p>
-                    <p><i class="fas fa-phone"></i> +44 7401787614</p>
-                    <p><i class="fas fa-map-marker-alt"></i> <a href="https://www.google.com/maps/place/I+FIX+CLOUD/@24.1879089,88.3057913,17z/data=!3m1!4b1!4m6!3m5!1s0x39fbd76666a80763:0x36244daf4660c2e3!8m2!3d24.1879089!4d88.3083662!16s%2Fg%2F11xd24ff1z?hl=en&entry=ttu" target="_blank">Visit our shop location</a></p>
-                    <div class="support-buttons">
-                        <a href="https://wa.me/447401787614" class="btn btn-sm btn-whatsapp">
-                            <i class="fab fa-whatsapp"></i> WhatsApp
+                    <div class="mt-8 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 max-w-4xl mx-auto">
+                        <a class="nav-link btn-primary px-6 py-3 rounded-lg font-semibold inline-flex items-center justify-center space-x-2 hover:-translate-y-1" data-section="services">
+                            <i class="ph ph-arrow-right"></i>
+                            <span>View Services</span>
+                        </a>
+                        <a class="nav-link btn-primary px-6 py-3 rounded-lg font-semibold inline-flex items-center justify-center space-x-2 hover:-translate-y-1" data-section="imei-check">
+                            <i class="ph ph-magnifying-glass"></i>
+                            <span>Check IMEI</span>
+                        </a>
+                        <a class="nav-link btn-primary px-6 py-3 rounded-lg font-semibold inline-flex items-center justify-center space-x-2 hover:-translate-y-1" data-section="reviews-page">
+                            <i class="ph ph-star"></i>
+                            <span>Customer Reviews</span>
+                        </a>
+                        <a class="nav-link btn-primary px-6 py-3 rounded-lg font-semibold inline-flex items-center justify-center space-x-2 hover:-translate-y-1" data-section="how-it-works">
+                            <i class="ph ph-question"></i>
+                            <span>How It Works</span>
                         </a>
                     </div>
+                </section>
+
+                <!-- Services Section -->
+                <section id="services" class="py-10">
+                    <h3 class="text-3xl font-bold text-center text-white mb-10">Our Services</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                        <!-- Service Card 1: iCloud Unlock -->
+                        <div class="glass-card p-6 flex flex-col items-center text-center">
+                            <!-- (FIXED) Icon changed to 'ph-lock-key-open' -->
+                            <i class="ph-fill ph-lock-key-open text-6xl text-cyan-400 mb-4"></i>
+                            <h4 class="text-2xl font-semibold text-white mb-2">iCloud Unlock</h4>
+                            <p class="text-gray-400 mb-4">Remove iCloud Activation Lock from any iPhone or iPad. Fast and permanent solution.</p>
+                            <p class="text-xl font-bold text-white mb-6">$20 - $130</p>
+                            <button class="order-btn btn-primary w-full py-2 rounded-lg font-medium" data-service="iCloud Unlock" data-price="0">
+                                Order Now
+                            </button>
+                        </div>
+                        <!-- Service Card 2: Carrier Unlock -->
+                        <div class="glass-card p-6 flex flex-col items-center text-center">
+                            <i class="ph-fill ph-sim-card text-6xl text-cyan-400 mb-4"></i>
+                            <h4 class="text-2xl font-semibold text-white mb-2">Carrier (SIM) Unlock</h4>
+                            <p class="text-gray-400 mb-4">Use your iPhone with any carrier worldwide. Permanent factory unlock.</p>
+                            <p class="text-xl font-bold text-white mb-6">$10 - $80</p>
+                            <button class="order-btn btn-primary w-full py-2 rounded-lg font-medium" data-service="Carrier (SIM) Unlock" data-price="0">
+                                Order Now
+                            </button>
+                        </div>
+                        <!-- Service Card 3: iCloud Bypass -->
+                        <div class="glass-card p-6 flex flex-col items-center text-center">
+                            <i class="ph-fill ph-wifi-slash text-6xl text-cyan-400 mb-4"></i>
+                            <h4 class="text-2xl font-semibold text-white mb-2">iCloud Bypass</h4>
+                            <p class="text-gray-400 mb-4">Bypass the iCloud Activation Lock (Wi-Fi only). Cellular/SIM, factory reset, and iOS updates are not supported after bypass.</p>
+                            <p class="text-xl font-bold text-white mb-6">$25 - $100</p>
+                            <button class="order-btn btn-primary w-full py-2 rounded-lg font-medium" data-service="iCloud Bypass" data-price="0">
+                                Order Now
+                            </button>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- How It Works Section -->
+                <section id="how-it-works" class="py-10">
+                    <h3 class="text-3xl font-bold text-center text-white mb-10">How It Works</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                        <div class="glass-card p-6 flex flex-col items-center text-center">
+                            <div class="flex items-center justify-center w-16 h-16 rounded-full bg-cyan-900/50 border border-cyan-500 mb-4">
+                                <span class="text-3xl font-bold text-cyan-400">1</span>
+                            </div>
+                            <h4 class="text-2xl font-semibold text-white mb-2">Register & Order</h4>
+                            <p class="text-gray-400">Create your account and select the service you need (e.g., iCloud, Carrier Unlock).</p>
+                        </div>
+                        <div class="glass-card p-6 flex flex-col items-center text-center">
+                            <div class="flex items-center justify-center w-16 h-16 rounded-full bg-cyan-900/50 border border-cyan-500 mb-4">
+                                <span class="text-3xl font-bold text-cyan-400">2</span>
+                            </div>
+                            <h4 class="text-2xl font-semibold text-white mb-2">Add Funds (USDT)</h4>
+                            <p class="text-gray-400">Go to your dashboard and submit a request to add funds securely using USDT (TRC20).</p>
+                        </div>
+                        <div class="glass-card p-6 flex flex-col items-center text-center">
+                            <div class="flex items-center justify-center w-16 h-16 rounded-full bg-cyan-900/50 border border-cyan-500 mb-4">
+                                <span class="text-3xl font-bold text-cyan-400">3</span>
+                            </div>
+                            <h4 class="text-2xl font-semibold text-white mb-2">Get Unlocked</h4>
+                            <p class="text-gray-400">Your order will be processed. Check your dashboard for the 'Done' status!</p>
+                        </div>
+                    </div>
+                </section>
+                
+                <!-- (UPDATED) IMEI Check Section -->
+                <section id="imei-check" class="py-10">
+                    <div class="glass-card max-w-3xl mx-auto p-8">
+                        <h3 class="text-3xl font-bold text-center text-white mb-6">Check Your iPhone's Status</h3>
+                        <p class="text-center text-gray-400 mb-6">Enter your IMEI and Email to submit a check request to our admin.</p>
+                        <div class="space-y-4">
+                            <div>
+                                <label for="imei-check-input" class="block text-sm font-medium text-gray-300 mb-2">IMEI Number</label>
+                                <input id="imei-check-input" type="text" placeholder="Enter 15-digit IMEI number" class="form-input w-full px-4 py-3 text-lg" maxlength="15">
+                                <small class="text-xs text-gray-500">Dial *#06# to find your IMEI</small>
+                            </div>
+                            <div>
+                                <label for="imei-email-input" class="block text-sm font-medium text-gray-300 mb-2">Email Address</label>
+                                <input id="imei-email-input" type="email" placeholder="Enter your email" class="form-input w-full px-4 py-3 text-lg">
+                            </div>
+                            <button id="submit-imei-check-btn" class="btn-primary w-full px-8 py-3 rounded-lg font-semibold text-lg flex-shrink-0">Check IMEI</button>
+                        </div>
+                        <!-- This div will show success/error -->
+                        <div id="imei-result" class="mt-6 text-center text-gray-300"></div>
+                    </div>
+                </section>
+                
+                <!-- (UPDATED) AI Device Helper -->
+                <section id="ai-helper" class="py-10">
+                    <div class="glass-card max-w-3xl mx-auto p-8">
+                        <h3 class="text-3xl font-bold text-center text-white mb-6">✨AI Helper</h3>
+                        <p class="text-center text-gray-400 mb-6">Not sure which service you need? Describe your problem, and our AI will help you.</p>
+                        <div class="space-y-4">
+                            <div>
+                                <label for="ai-problem-input" class="block text-sm font-medium text-gray-300 mb-2">Describe your problem:</label>
+                                <textarea id="ai-problem-input" class="form-input w-full px-4 py-3 text-lg" rows="3" placeholder="Amar phone-er screen-e shudhu Apple logo dekha jacche..."></textarea>
+                            </div>
+                            <button id="diagnose-ai-btn" class="btn-primary w-full px-8 py-3 rounded-lg font-semibold text-lg flex-shrink-0">Diagnose Now</button>
+                        </div>
+                        <!-- AI result div -->
+                        <div id="ai-result" class="mt-6 text-gray-300 hidden">
+                            <h4 class="text-xl font-semibold text-cyan-400 mb-3">AI Diagnosis:</h4>
+                            <div id="ai-result-content" class="glass-card p-4 rounded-lg border border-gray-700 space-y-2" style="white-space: pre-wrap;">
+                                <p class="text-gray-500">Analyzing your problem...</p>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Customer Testimonials Section -->
+                <section id="testimonials" class="py-10">
+                    <h3 class="text-3xl font-bold text-center text-white mb-10">What Our Customers Say</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                        <div class="glass-card p-6">
+                            <div class="flex items-center mb-4">
+                                <img src="https://placehold.co/40x40/00dfd8/0a0a0a?text=S" alt="User" class="w-10 h-10 rounded-full mr-3">
+                                <div>
+                                    <p class="font-semibold text-white">Shakib Islam</p>
+                                    <p class="text-sm text-gray-400">Bangladesh</p>
+                                </div>
+                            </div>
+                            <p class="text-gray-300">"Awesome service! Amar iCloud locked iPhone 12 Pro. unlock hoyeche matro 1 dine. Highly recommended."</p>
+                        </div>
+                        <div class="glass-card p-6">
+                            <div class="flex items-center mb-4">
+                                <img src="https://placehold.co/40x40/007cf0/0a0a0a?text=R" alt="User" class="w-10 h-10 rounded-full mr-3">
+                                <div>
+                                    <p class="font-semibold text-white">Rina Kumar</p>
+                                    <p class="text-sm text-gray-400">India</p>
+                                </div>
+                            </div>
+                            <p class="text-gray-300">"Khub easy process. USDT add korlam ar order korlam. Support team o onek helpful. Carrier unlock done"</p>
+                        </div>
+                        <div class="glass-card p-6">
+                            <div class="flex items-center mb-4">
+                                <img src="https://placehold.co/40x40/ffffff/0a0a0a?text=J" alt="User" class="w-10 h-10 rounded-full mr-3">
+                                <div>
+                                    <p class="font-semibold text-white">Jahid Hasan</p>
+                                    <p class="text-sm text-gray-400">Bangladesh</p>
+                                </div>
+                            </div>
+                            <p class="text-gray-300">"First time ektu voye chilam, kintu service 100% legit. Amar balance o history shob profile e dekha jay. Thanks iFix Cloud."</p>
+                        </div>
+                    </div>
+                    <div class="text-center mt-8">
+                        <a class="nav-link text-cyan-400 font-semibold text-lg" data-section="reviews-page">
+                            View All Reviews &raquo;
+                        </a>
+                    </div>
+                </section>
+            </main>
+        </div>
+
+        <!-- (NEW) Reviews Page (Page 2) -->
+        <div id="reviews-page" class="hidden">
+            <section class="container mx-auto px-4 sm:px-6 lg:px-8 py-10">
+                <button class="nav-link btn-secondary mb-8 inline-flex items-center space-x-2 px-4 py-2 rounded-lg" data-section="main-content">
+                    <i class="ph ph-arrow-left"></i>
+                    <span>Back to Home</span>
+                </button>
+                <h3 class="text-3xl font-bold text-center text-white mb-10">Customer Reviews</h3>
+                
+                <div class="glass-card max-w-sm mx-auto p-4 mb-10 text-center">
+                    <p class="text-xl text-gray-400">Our Success Rate</p>
+                    <p class="text-5xl font-bold text-cyan-400">99.99%</p>
                 </div>
+
+                <!-- (UPDATED) Layout Change -->
+                <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                    <!-- Column 1: Show Reviews -->
+                    <div class="lg:col-span-2 space-y-4">
+                        <h4 class="text-2xl font-semibold text-white mb-4">Latest Reviews</h4>
+                        
+                        <!-- (NEW) This container will hold dynamic reviews from DB -->
+                        <div id="review-list-container" class="space-y-4">
+                            <div id="review-loading-msg" class="w-full text-center py-5">
+                                <p class="text-gray-500 text-center">Loading new customer reviews...</p>
+                            </div>
+                        </div>
+                        
+                        
+
+                    <!-- Column 2: Submit Review -->
+                    <div class="lg:col-span-1">
+                        <h4 class="text-2xl font-semibold text-white mb-4">Submit Your Review</h4>
+                        
+                        <div id="login-to-review" class="glass-card p-6 text-center">
+                            <p class="text-gray-400">Please 
+                                <button id="login-btn-from-review" class="text-cyan-400 font-semibold hover:underline">login</button> 
+                                to submit a review for your completed order.
+                            </p>
+                        </div>
+
+                        <form id="review-form" class="glass-card p-6 space-y-4 hidden">
+                            <div>
+                                <label for="review-order-select" class="block text-sm font-medium text-gray-300 mb-2">Select Your Completed Order</label>
+                                <select id="review-order-select" class="form-input w-full px-4 py-2" required>
+                                    <option value="">Loading your orders...</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label for="review-name" class="block text-sm font-medium text-gray-300 mb-2">Name</label>
+                                <input type="text" id="review-name" class="form-input w-full px-4 py-2" readonly>
+                            </div>
+                            <div>
+                                <label for="review-country-select" class="block text-sm font-medium text-gray-300 mb-2">Country</label>
+                                <!-- (UPDATED) Country Dropdown -->
+                                <select id="review-country-select" class="form-input w-full px-4 py-2" required>
+                                    <option value="">Select Country...</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-gray-300 mb-2">Rating</label>
+                                <div id="review-rating" class="star-rating flex flex-row-reverse justify-end text-3xl">
+                                    <input type="radio" id="star5" name="rating" value="5" class="hidden"><label for="star5" class="cursor-pointer" title="5 stars">&#9733;</label>
+                                    <input type="radio" id="star4" name="rating" value="4" class="hidden"><label for="star4" class="cursor-pointer" title="4 stars">&#9733;</label>
+                                    <input type="radio" id="star3" name="rating" value="3" class="hidden"><label for="star3" class="cursor-pointer" title="3 stars">&#9733;</label>
+                                    <input type="radio" id="star2" name="rating" value="2" class="hidden"><label for="star2" class="cursor-pointer" title="2 stars">&#9733;</label>
+                                    <input type="radio" id="star1" name="rating" value="1" class="hidden"><label for="star1" class="cursor-pointer" title="1 star">&#9733;</label>
+                                </div>
+                            </div>
+                            <div>
+                                <label for="review-comment" class="block text-sm font-medium text-gray-300 mb-2">Comment</label>
+                                <textarea id="review-comment" class="form-input w-full px-4 py-2" rows="4" placeholder="Share your experience..." required></textarea>
+                            </div>
+                            <p id="review-error" class="text-red-400 text-center text-sm hidden"></p>
+                            <button type="submit" id="submit-review-btn" class="btn-primary w-full py-2 rounded-lg font-medium">Submit Review</button>
+                        </form>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+
+        <!-- Footer -->
+        <footer class="border-t border-gray-800 mt-16">
+            <div class="container mx-auto px-4 sm:px-6 lg:px-8 py-8 text-center text-gray-500">
+                <p>&copy; 2018-2025 iFix Cloud. All rights reserved.</p>
+                <p class="text-sm">Disclaimer: <mark>This service is intended for legitimate device owners. Stolen devices are not supported.</mark></p>
             </div>
-            
-            <div class="footer-bottom">
-                <p>&copy; 2025 IFIX CLOUD. All Rights Reserved.</p>
-                <div class="footer-legal">
-                    <a href="privacy.html">Privacy Policy</a>
-                    <a href="terms.html">Terms of Service</a>
+        </footer>
+
+        <!-- (NEW) Floating WhatsApp Button -->
+        <a href="https://wa.me/+447401787614" target="_blank" class="whatsapp-float">
+            <i class="ph-fill ph-whatsapp-logo"></i>
+        </a>
+
+        <!-- MODALS (Auth, Dashboard, Order) -->
+        <!-- Auth Modal (Login/Register) -->
+        <div id="auth-modal" class="modal modal-hidden fixed inset-0 z-50 flex items-center justify-center p-4">
+            <div class="modal-backdrop fixed inset-0"></div>
+            <div class="glass-card w-full max-w-md z-10 p-8 rounded-2xl relative">
+                <button id="auth-modal-close" class="absolute top-4 right-4 text-gray-400 hover:text-white">
+                    <i class="ph ph-x text-2xl"></i>
+                </button>
+                <div class="flex mb-6 border-b border-gray-700">
+                    <button id="login-tab" class="tab-btn flex-1 py-3 text-lg font-semibold border-b-2 border-cyan-400 text-white">Login</button>
+                    <button id="register-tab" class="tab-btn flex-1 py-3 text-lg font-semibold border-b-2 border-transparent text-gray-500">Register</button>
+                </div>
+                <div id="auth-error" class="text-red-400 text-center mb-4 hidden"></div>
+                <form id="login-form">
+                    <div class="mb-4">
+                        <label for="login-email" class="block text-sm font-medium text-gray-300 mb-2">Email</label>
+                        <input type="email" id="login-email" class="form-input w-full px-4 py-2" required>
+                    </div>
+                    <div class="mb-6">
+                        <label for="login-password" class="block text-sm font-medium text-gray-300 mb-2">Password</label>
+                        <input type="password" id="login-password" class="form-input w-full px-4 py-2" required>
+                    </div>
+                    <button type="submit" class="btn-primary w-full py-3 rounded-lg font-semibold">Login</button>
+                </form>
+                <form id="register-form" class="hidden">
+                    <div class="mb-4">
+                        <label for="register-name" class="block text-sm font-medium text-gray-300 mb-2">Full Name</label>
+                        <input type="text" id="register-name" class="form-input w-full px-4 py-2" required>
+                    </div>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-4">
+                        <div>
+                            <label for="register-phone" class="block text-sm font-medium text-gray-300 mb-2">Phone Number</label>
+                            <input type="tel" id="register-phone" class="form-input w-full px-4 py-2" required>
+                        </div>
+                        <div>
+                            <label for="register-whatsapp" class="block text-sm font-medium text-gray-300 mb-2">WhatsApp Number</label>
+                            <input type="tel" id="register-whatsapp" class="form-input w-full px-4 py-2" required>
+                        </div>
+                    </div>
+                    <!-- (UPDATED) Country Dropdown -->
+                    <div class="mb-4">
+                        <label for="register-country-select" class="block text-sm font-medium text-gray-300 mb-2">Country</label>
+                        <select id="register-country-select" class="form-input w-full px-4 py-2" required>
+                            <option value="">Select Country...</option>
+                        </select>
+                    </div>
+                    <div class="mb-4">
+                        <label for="register-email" class="block text-sm font-medium text-gray-300 mb-2">Email</label>
+                        <input type="email" id="register-email" class="form-input w-full px-4 py-2" required>
+                    </div>
+                    <div class="mb-4">
+                        <label for="register-password" class="block text-sm font-medium text-gray-300 mb-2">Password</label>
+                        <input type="password" id="register-password" class="form-input w-full px-4 py-2" placeholder="Min. 6 characters" required>
+                    </div>
+                    <button type="submit" class="btn-primary w-full py-3 rounded-lg font-semibold">Create Account</button>
+                </form>
+            </div>
+        </div>
+
+        <!-- Dashboard Modal -->
+        <div id="dashboard-modal" class="modal modal-hidden fixed inset-0 z-50 flex items-center justify-center p-4">
+            <div class="modal-backdrop fixed inset-0"></div>
+            <div class="glass-card w-full max-w-3xl z-10 rounded-2xl relative h-[90vh] flex flex-col">
+                <button id="dashboard-modal-close" class="absolute top-4 right-4 text-gray-400 hover:text-white z-20">
+                    <i class="ph ph-x text-2xl"></i>
+                </button>
+                <div class="flex-shrink-0 p-6 border-b border-gray-700">
+                    <h3 class="text-2xl font-semibold text-white">My Dashboard</h3>
+                    <p id="dashboard-user-email" class="text-gray-400"></p>
+                </div>
+                <div class="flex flex-col md:flex-row flex-grow overflow-hidden">
+                    <div class="w-full md:w-1/3 flex-shrink-0 p-6 border-b md:border-b-0 md:border-r border-gray-700">
+                        <nav class="flex flex-col space-y-2">
+                            <button class="dashboard-tab-btn flex items-center space-x-3 p-3 rounded-lg bg-gray-700/50 text-cyan-400" data-tab="profile">
+                                <i class="ph ph-user text-xl"></i>
+                                <span class="font-medium">Profile & Balance</span>
+                            </button>
+                            <button class="dashboard-tab-btn flex items-center space-x-3 p-3 rounded-lg text-gray-300 hover:bg-gray-700/30" data-tab="history">
+                                <i class="ph ph-list-bullets text-xl"></i>
+                                <span class="font-medium">Order History</span>
+                            </button>
+                            <button class="dashboard-tab-btn flex items-center space-x-3 p-3 rounded-lg text-gray-300 hover:bg-gray-700/30" data-tab="funds">
+                                <i class="ph ph-wallet text-xl"></i>
+                                <span class="font-medium">Add Funds</span>
+                            </button>
+                        </nav>
+                    </div>
+                    <div class="flex-grow p-6 overflow-y-auto">
+                        <div id="tab-profile" class="dashboard-tab-content">
+                            <h4 class="text-xl font-semibold mb-4">My Profile</h4>
+                            <div class="glass-card p-6">
+                                <p class="text-gray-400">Current Balance</p>
+                                <p id="dashboard-balance" class="text-4xl font-bold text-green-400">$0.00</p>
+                                <div id="profile-details" class="mt-6 border-t border-gray-700 pt-4 text-gray-300 space-y-2">
+                                    <p class="text-gray-500">Loading profile details...</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="tab-history" class="dashboard-tab-content hidden">
+                            <h4 class="text-xl font-semibold mb-4">My Order History</h4>
+                            <div id="order-history-list" class="space-y-4">
+                                <p class="text-gray-500 text-center">No orders found.</p>
+                            </div>
+                        </div>
+                        <div id="tab-funds" class="dashboard-tab-content hidden">
+                            <h4 class="text-xl font-semibold mb-4">Add Funds</h4>
+                            
+                            <!-- (UPDATED) Add Funds Text -->
+                            <p class="text-gray-400 mb-4">Funds can be added using USDT (<mark>Tether-USDT-TRC20</mark>) only.</p>
+
+                            <div class="glass-card p-6 mb-6">
+                                <label class="block text-sm font-medium text-gray-300 mb-2">USDT TRC20 Deposit Address</label>
+                                <div class="flex">
+                                    <input id="usdt-address" type="text" class="form-input w-full px-4 py-2 rounded-r-none" value="TAGNAFfYYiUKTgr8nDHqfr8cvY4qpa93Qc" readonly>
+                                    <button id="copy-address-btn" class="btn-secondary px-4 py-2 rounded-l-none rounded-r-lg flex-shrink-0">
+                                        <i class="ph ph-copy"></i>
+                                    </button>
+                                </div>
+                                <p id="copy-success" class="text-green-400 text-sm mt-2 hidden">Address copied!</p>
+                            </div>
+                            <div class="glass-card p-6">
+                                <!-- (UPDATED) Add Funds Text -->
+                                <h5 class="font-semibold mb-4">After payment:</h5>
+                                <p class="text-gray-400 mb-4">
+                                    <span style="background-color: yellow; color: black; padding: 2px 4px; border-radius: 3px;">1.Enter the amount of USDT you sent in the form below, then click on the 'ADD FUND' button.<br>2.If the funds are not added within 2 minutes, please send a message to our WhatsApp Support.</span>
+                                </p>
+                                
+                                <div class="mb-4">
+                                    <label for="fund-amount" class="block text-sm font-medium text-gray-300 mb-2">Amount (USDT)</label>
+                                    <input type="number" id="fund-amount" class="form-input w-full px-4 py-2" placeholder="e.g., 50">
+                                </div>
+                                <!-- (UPDATED) Button text -->
+                                <button id="add-fund-btn" class="btn-primary w-full py-3 rounded-lg font-semibold">Submit Fund Request</button>
+                                <p id="fund-message" class="text-center mt-4"></p>
+                            </div>
+                            
+                            <!-- (NEW) Fund Request History -->
+                            <div id="fund-request-history" class="mt-8">
+                                <h4 class="text-xl font-semibold mb-4">Fund Request History</h4>
+                                <div id="fund-history-list" class="space-y-4">
+                                    <p class="text-gray-500 text-center">No fund requests found.</p>
+                                </div>
+                            </div>
+                            
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
-    </footer>
 
-    <!-- WhatsApp Floating Button -->
-    <a href="https://wa.me/447401787614" class="whatsapp-float" target="_blank">
-        <i class="fab fa-whatsapp"></i>
-    </a>
-    
-    <!-- IMEI Check Modal -->
-    <div id="imei-check-modal" class="modal">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h2><i class="fas fa-search"></i> IMEI Checker</h2>
-                <span class="modal-close">&times;</span>
+        <!-- Order Modal -->
+        <div id="order-modal" class="modal modal-hidden fixed inset-0 z-50 flex items-center justify-center p-4">
+            <div class="modal-backdrop fixed inset-0"></div>
+            <div class="glass-card w-full max-w-lg z-10 p-8 rounded-2xl relative">
+                <button id="order-modal-close" class="absolute top-4 right-4 text-gray-400 hover:text-white">
+                    <i class="ph ph-x text-2xl"></i>
+                </button>
+                <h3 class="text-2xl font-semibold mb-2">Place New Order</h3>
+                <p id="order-service-name" class="text-cyan-400 text-lg mb-6"></p>
+                <form id="order-form">
+                    
+                    <div id="imei-div" class="mb-4">
+                        <label for="order-imei" class="block text-sm font-medium text-gray-300 mb-2">iPhone IMEI</label>
+                        <input type="text" id="order-imei" class="form-input w-full px-4 py-2" placeholder="15-digit IMEI" maxlength="15">
+                    </div>
+                    <div id="serial-number-div" class="mb-4 hidden">
+                        <label for="order-serial" class="block text-sm font-medium text-gray-300 mb-2">Device Serial Number</label>
+                        <input type="text" id="order-serial" class="form-input w-full px-4 py-2" placeholder="e.g., C02XXXXXXXXX">
+                    </div>
+                    <div id="model-text-div" class="mb-4 hidden">
+                        <label for="order-model-text" class="block text-sm font-medium text-gray-300 mb-2">iPhone Model</label>
+                        <input type="text" id="order-model-text" class="form-input w-full px-4 py-2" placeholder="e.g., iPhone 14 Pro">
+                    </div>
+                    <div id="model-select-div" class="mb-4 hidden">
+                        <label for="order-model-select" class="block text-sm font-medium text-gray-300 mb-2">Select Model (Price will update)</label>
+
+                        <select id="order-model-select" class="form-input w-full px-4 py-2">
+                            <option value="">Select Model...</option>
+                        </select>
+                    </div>
+                    <div id="download-tools-div" class="mb-4 hidden">
+                        <a href="https://mega.nz/file/qlVTUAzA#ikpBJeEX86rvKC_eNRLlfQcaUH0i0aAOpSA-eX9PYGU" target="_blank" rel="noopener noreferrer" class="btn-secondary w-full py-2 rounded-lg font-medium flex items-center justify-center space-x-2">
+                            <i class="ph ph-download-simple text-lg"></i>
+                            <span>Download Tools</span>
+                       </a>
+                    </div>
+                    <div class="glass-card p-4 my-6">
+                        <div class="flex justify-between items-center">
+                            <span class="text-gray-400">Service Price:</span>
+                            <span id="order-price" class="text-white font-semibold">$0.00</span>
+                        </div>
+                        <div class="flex justify-between items-center mt-2">
+                            <span class="text-gray-400">Your Balance:</span>
+                            <span id="order-balance" class="text-green-400 font-semibold">$0.00</span>
+                        </div>
+                    </div>
+                    <p id="order-error" class="text-red-400 text-center mb-4 hidden"></p>
+                    <button type="submit" id="confirm-order-btn" class="btn-primary w-full py-3 rounded-lg font-semibold">Confirm & Place Order</button>
+                </form>
             </div>
-            <div class="modal-body">
-                <!-- Content will be dynamically added by JavaScript -->
-            </div>
+        </div>
+
+        <!-- Global Message Popup -->
+        <div id="message-popup" class="fixed bottom-5 right-5 glass-card p-4 rounded-lg shadow-lg z-50 hidden border-l-4 border-cyan-400">
+            <p id="message-text" class="text-white"></p>
         </div>
     </div>
 
-    <script src="js/main.js"></script>
-    <script src="js/testimonials.js"></script>
+
+    <!-- =========== ADMIN PANEL (Hidden by default) =========== -->
+    <div id="admin-panel" class="hidden">
+        <header class="sticky top-0 z-50 glass-card border-b border-gray-800">
+            <nav class="container mx-auto px-4 sm:px-6 lg:px-8 py-3 flex justify-between items-center">
+                <h1 class="text-xl font-bold text-cyan-400">Admin Panel</h1>
+                <div>
+                    <span id="admin-email" class="text-sm text-gray-400 mr-4"></span>
+                    <button id="admin-logout-btn" class="btn-secondary text-sm px-4 py-2 rounded-lg text-red-400 hover:bg-red-900/50">
+                        Logout
+                    </button>
+                </div>
+            </nav>
+        </header>
+
+        <main class="container mx-auto px-4 sm:px-6 lg:px-8 py-12">
+            <div class="flex flex-col md:flex-row gap-8">
+                <!-- Admin Sidebar -->
+                <aside class="w-full md:w-1/4">
+                    <nav class="flex flex-col space-y-2 glass-card p-4">
+                        <button class="admin-tab-btn flex items-center space-x-3 p-3 rounded-lg bg-gray-700/50 text-cyan-400" data-admin-tab="fund-requests">
+                            <i class="ph ph-wallet text-xl"></i>
+                            <span class="font-medium">Fund Requests</span>
+                            <span id="fund-request-count" class="bg-red-500 text-white text-xs font-bold rounded-full h-5 w-5 flex items-center justify-center ml-auto">0</span>
+                        </button>
+                        <button class="admin-tab-btn flex items-center space-x-3 p-3 rounded-lg text-gray-300 hover:bg-gray-700/30" data-admin-tab="all-orders">
+                            <i class="ph ph-list-bullets text-xl"></i>
+                            <span class="font-medium">All Orders</span>
+                        </button>
+                        <button class="admin-tab-btn flex items-center space-x-3 p-3 rounded-lg text-gray-300 hover:bg-gray-700/30" data-admin-tab="imei-checks">
+                            <i class="ph ph-magnifying-glass text-xl"></i>
+                            <span class="font-medium">IMEI Checks</span>
+                            <span id="imei-check-count" class="bg-red-500 text-white text-xs font-bold rounded-full h-5 w-5 flex items-center justify-center ml-auto">0</span>
+                        </button>
+                        <button class="admin-tab-btn flex items-center space-x-3 p-3 rounded-lg text-gray-300 hover:bg-gray-700/30" data-admin-tab="pending-reviews">
+                            <i class="ph ph-star text-xl"></i>
+                            <span class="font-medium">Pending Reviews</span>
+                            <span id="review-count" class="bg-red-500 text-white text-xs font-bold rounded-full h-5 w-5 flex items-center justify-center ml-auto">0</span>
+                        </button>
+                        <button class="admin-tab-btn flex items-center space-x-3 p-3 rounded-lg text-gray-300 hover:bg-gray-700/30" data-admin-tab="live-reviews">
+                            <i class="ph ph-eye text-xl"></i>
+                            <span class="font-medium">Live Reviews</span>
+                        </button>
+                        <button class="admin-tab-btn flex items-center space-x-3 p-3 rounded-lg text-gray-300 hover:bg-gray-700/30" data-admin-tab="user-list">
+                            <i class="ph ph-users text-xl"></i>
+                            <span class="font-medium">User List</span>
+                        </button>
+                    </nav>
+                </aside>
+
+                <!-- Admin Content Area -->
+                <section class="w-full md:w-3/4">
+                    
+                    <!-- Fund Requests Tab -->
+                    <div id="admin-tab-fund-requests" class="admin-tab-content glass-card p-6">
+                        <h2 class="text-2xl font-semibold mb-4">Pending Fund Requests</h2>
+                        <div class="admin-table-container">
+                            <table class="admin-table">
+                                <thead>
+                                    <tr>
+                                        <th>Date</th>
+                                        <th>User Email</th>
+                                        <th>Amount</th>
+                                        <th>Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="admin-fund-request-list">
+                                    <tr><td colspan="4" class="text-center text-gray-500 py-4">Loading requests...</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <!-- All Orders Tab -->
+                    <div id="admin-tab-all-orders" class="admin-tab-content glass-card p-6 hidden">
+                        <h2 class="text-2xl font-semibold mb-4">All Customer Orders</h2>
+                        <div class="admin-table-container">
+                            <table class="admin-table">
+                                <thead>
+                                    <tr>
+                                        <th>Date</th>
+                                        <th>User Email</th>
+                                        <th>Service</th>
+                                        <th>IMEI/Serial</th>
+                                        <th>Model</th>
+                                        <th>Price</th>
+                                        <th>Status</th>
+                                        <th>Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="admin-order-list">
+                                    <tr><td colspan="8" class="text-center text-gray-500 py-4">Loading orders...</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <!-- IMEI Checks Tab -->
+                    <div id="admin-tab-imei-checks" class="admin-tab-content glass-card p-6 hidden">
+                        <h2 class="text-2xl font-semibold mb-4">All IMEI Checks</h2>
+                        <div class="mb-4">
+                            <button id="delete-selected-imei-btn" class="btn-secondary text-red-400 px-4 py-2 rounded-lg text-sm">Delete Selected</button>
+                        </div>
+                        <div class="admin-table-container">
+                            <table class="admin-table">
+                                <thead>
+                                    <tr>
+                                        <th><input type="checkbox" id="select-all-imei"></th>
+                                        <th>Date</th>
+                                        <th>Email</th>
+                                        <th>IMEI</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="admin-imei-check-list">
+                                    <tr><td colspan="4" class="text-center text-gray-500 py-4">Loading IMEI checks...</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <!-- Pending Reviews Tab -->
+                    <div id="admin-tab-pending-reviews" class="admin-tab-content glass-card p-6 hidden">
+                        <h2 class="text-2xl font-semibold mb-4">Pending Reviews</h2>
+                        <div class="admin-table-container">
+                            <table class="admin-table">
+                                <thead>
+                                    <tr>
+                                        <th>Date</th>
+                                        <th>Name</th>
+                                        <th>Country</th>
+                                        <th>Rating</th>
+                                        <th>Comment</th>
+                                        <th>Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="admin-review-list">
+                                    <tr><td colspan="6" class="text-center text-gray-500 py-4">Loading reviews...</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <!-- Live Reviews Tab -->
+                    <div id="admin-tab-live-reviews" class="admin-tab-content glass-card p-6 hidden">
+                        <h2 class="text-2xl font-semibold mb-4">Live Reviews</h2>
+                        <div class="admin-table-container">
+                            <table class="admin-table">
+                                <thead>
+                                    <tr>
+                                        <th>Date</th>
+                                        <th>Name</th>
+                                        <th>Country</th>
+                                        <th>Rating</th>
+                                        <th>Comment</th>
+                                        <th>Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="admin-live-review-list">
+                                    <tr><td colspan="6" class="text-center text-gray-500 py-4">Loading live reviews...</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <!-- User List Tab -->
+                    <div id="admin-tab-user-list" class="admin-tab-content glass-card p-6 hidden">
+                        <h2 class="text-2xl font-semibold mb-4">Registered User List</h2>
+                        <div class="admin-table-container">
+                            <table class="admin-table">
+                                <thead>
+                                    <tr>
+                                        <th>Name</th>
+                                        <th>Email</th>
+                                        <th>Country</th>
+                                        <th>Phone</th>
+                                        <th>WhatsApp</th>
+                                        <th>Balance</th>
+                                        <th>Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="admin-user-list">
+                                    <tr><td colspan="7" class="text-center text-gray-500 py-4">Loading users...</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                </section>
+            </div>
+        </main>
+    </div>
+
+    <!-- Admin Add Fund Modal -->
+    <div id="admin-add-fund-modal" class="modal modal-hidden fixed inset-0 z-50 flex items-center justify-center p-4">
+        <div class="modal-backdrop fixed inset-0"></div>
+        <div class="glass-card w-full max-w-md z-10 p-8 rounded-2xl relative">
+            <button id="admin-add-fund-modal-close" class="absolute top-4 right-4 text-gray-400 hover:text-white">
+                <i class="ph ph-x text-2xl"></i>
+            </button>
+            <h3 class="text-2xl font-semibold mb-2">Add Fund to User</h3>
+            <p id="admin-add-fund-user-email" class="text-cyan-400 text-lg mb-6"></p>
+            <form id="admin-add-fund-form">
+                <div class="mb-4">
+                    <label for="admin-fund-amount" class="block text-sm font-medium text-gray-300 mb-2">Amount (USDT)</label>
+                    <input type="number" id="admin-fund-amount" class="form-input w-full px-4 py-2" placeholder="e.g., 50" required>
+                </div>
+                <input type="hidden" id="admin-add-fund-user-id">
+                <p id="admin-add-fund-error" class="text-red-400 text-center mb-4 hidden"></p>
+                <button type="submit" id="admin-confirm-add-fund-btn" class="btn-primary w-full py-3 rounded-lg font-semibold">Confirm & Add Fund</button>
+            </form>
+        </div>
+    </div>
+
+
+    <!-- Firebase SDKs -->
+    <script type="module">
+        // Import Firebase modules
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
+        import { 
+            getAuth, 
+            signInAnonymously, 
+            signInWithCustomToken, 
+            onAuthStateChanged,
+            createUserWithEmailAndPassword,
+            signInWithEmailAndPassword,
+            signOut
+        } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
+        import { 
+            getFirestore, 
+            setDoc, 
+            getDoc, 
+            doc, 
+            collection,
+            addDoc,
+            query,
+            onSnapshot,
+            serverTimestamp,
+            increment,
+            updateDoc,
+            where,
+            getDocs,
+            deleteDoc, // (NEW) For admin
+            writeBatch // (NEW) For admin
+        } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
+
+        // --- (UPDATED) Firebase Config ---
+        const firebaseConfig = {
+            apiKey: "AIzaSyB7RvOfm48jbyzH6e9Yf4qs4PO_Bcl4NjU",
+            authDomain: "isupport-pro.firebaseapp.com",
+            projectId: "isupport-pro",
+            storageBucket: "isupport-pro.appspot.com",
+            messagingSenderId: "588774334403",
+            appId: "1:588774334403:web:7c8033b7688017e32ea776"
+        };
+
+        // --- (UPDATED) App ID ---
+        const appId = "isupport-pro"; // Hardcoded from config
+
+        // --- Initialize Firebase ---
+        let app, auth, db;
+        let currentUser = null;
+        let currentUserId = null;
+        let currentUserProfile = {};
+        let currentUserBalance = 0;
+
+        let userProfileUnsubscribe = null;
+        let orderHistoryUnsubscribe = null;
+        let fundHistoryUnsubscribe = null; 
+        
+        // --- (NEW) Admin Email ---
+        const ADMIN_EMAIL = "ifixcloud.unlock@gmail.com";
+        
+        // --- (NEW) Admin State ---
+        let adminListeners = []; // Array to hold admin onSnapshot unsubscribers
+        let isAdmin = false;
+
+        // --- Price Maps ---
+        const icloudPriceMap = { "iPhone 5 / 5C / 5S": 20, "iPhone 6 / 6 Plus": 20, "iPhone 6S / 6S Plus": 20, "iPhone SE (1st Gen)": 20, "iPhone 7 / 7 Plus": 30, "iPhone 8 / 8 Plus": 30, "iPhone X": 40, "iPhone XR": 40, "iPhone XS / XS Max": 40, "iPhone SE (2nd Gen)": 50, "iPhone SE (3rd Gen)": 50, "iPhone 11": 60, "iPhone 11 Pro / 11 Pro Max": 60, "iPhone 12 Mini": 60, "iPhone 12 / 12 Pro": 70, "iPhone 12 Pro Max": 80, "iPhone 13": 80, "iPhone 13 Mini": 80, "iPhone 13 Pro": 90, "iPhone 13 Pro Max": 90, "iPhone 14 / 14 Plus": 100, "iPhone 14 Pro / 14 Pro Max": 100, "iPhone 15 / 15 Plus": 110, "iPhone 15 Pro / 15 Pro Max": 110, "iPhone 16 / 16 Plus": 120, "iPhone 16 Pro / 16 Pro Max": 120, "iPhone 17 / 17 Plus": 130, "iPhone 17 Pro / 17 Pro Max": 130, "iPad (5th-7th Gen)": 35, "iPad Mini (4/5)": 35, "iPad Air (2/3)": 35, "iPad (8th-10th Gen)": 55, "iPad Mini (6th Gen)": 55, "iPad Air (4th/5th Gen)": 55, "iPad Pro (2017-2020)": 75, "iPad Pro (M1)": 75, "iPad Pro (M2 or later)": 100 };
+        const carrierPriceMap = { "iPhone 5s / 6 / 6 Plus / 6s / 6s Plus / SE (1st-3rd gen)": 10, "iPhone 7 / 7 Plus / 8 / 8 Plus": 10, "iPhone X / XR / XS / XS Max": 20, "iPhone 11 / 11 Pro / 11 Pro Max / 12 mini": 30, "iPhone 12 / 12 Pro": 40, "iPhone 12 Pro Max / 13 mini / 13": 40, "iPhone 13 Pro / 13 Pro Max": 50, "iPhone 14 / 14 Plus / 14 Pro / 14 Pro Max": 60, "iPhone 15 / 15 Plus / 15 Pro / 15 Pro Max": 70, "iPhone 16 / 16 Plus / 16 Pro / 16 Pro Max": 70, "iPhone 17 / 17 Pro / 17 Pro Max": 80 };
+        const bypassPriceMap = { "iPhone 5s / 6 / 6 Plus / 6s / 6s Plus": 25, "iPhone 7 / 7 Plus / 8 / 8 Plus": 25, "iPhone X / XR / XS / XS Max": 30, "iPhone SE (2nd Gen) / SE (3rd Gen)": 30, "iPhone 11 / 11 Pro / 11 Pro Max / 12 mini": 40, "iPhone 12 / 12 Pro / 12 Pro Max": 50, "iPhone 13 / 13 mini": 50, "iPhone 13 Pro / 13 Pro Max": 60, "iPhone 14 / 14 Plus / 14 Pro / 14 Pro Max": 70, "iPhone 15 / 15 Plus / 15 Pro / 15 Pro Max": 80, "iPhone 16 / 16 Plus / 16 Pro / 16 Pro Max": 90, "iPhone 17 / 17 Pro / 17 Pro Max": 100 };
+        
+        // --- (NEW) Country List ---
+        const countryList = [
+            "USA", "UK", "Canada", "Australia", "Afghanistan", "Albania", "Algeria", "Andorra", "Angola", "Antigua and Barbuda",
+            "Argentina", "Armenia", "Austria", "Azerbaijan", "Bahamas", "Bahrain", "Bangladesh", "Barbados", "Belarus", "Belgium",
+            "Belize", "Benin", "Bhutan", "Bolivia", "Bosnia and Herzegovina", "Botswana", "Brazil", "Brunei", "Bulgaria", "Burkina Faso",
+            "Burundi", "Cabo Verde", "Cambodia", "Cameroon", "Central African Republic", "Chad", "Chile", "China", "Colombia", "Comoros",
+            "Congo (Congo-Brazzaville)", "Costa Rica", "Cote d'Ivoire", "Croatia", "Cuba", "Cyprus", "Czechia (Czech Republic)", "Denmark",
+            "Djibouti", "Dominica", "Dominican Republic", "Ecuador", "Egypt", "El Salvador", "Equatorial Guinea", "Eritrea", "Estonia",
+            "Eswatini (fmr. Swaziland)", "Ethiopia", "Fiji", "Finland", "France", "Gabon", "Gambia", "Georgia", "Germany", "Ghana",
+            "Greece", "Grenada", "Guatemala", "Guinea", "Guinea-Bissau", "Guyana", "Haiti", "Honduras", "Hungary", "Iceland", "India",
+            "Indonesia", "Iran", "Iraq", "Ireland", "Israel", "Italy", "Jamaica", "Japan", "Jordan", "Kazakhstan", "Kenya", "Kiribati",
+            "Kuwait", "Kyrgyzstan", "Laos", "Latvia", "Lebanon", "Lesotho", "Liberia", "Libya", "Liechtenstein", "Lithuania", "Luxembourg",
+"Madagascar", "Malawi", "Malaysia", "Maldives", "Mali", "Malta", "Marshall Islands", "Mauritania", "Mauritius", "Mexico",
+"Micronesia", "Moldova", "Monaco", "Mongolia", "Montenegro", "Morocco", "Mozambique", "Myanmar (formerly Burma)", "Namibia",
+"Nauru", "Nepal", "Netherlands", "New Zealand", "Nicaragua", "Niger", "Nigeria", "North Korea", "North Macedonia", "Norway",
+"Oman", "Pakistan", "Palau", "Palestine State", "Panama", "Papua New Guinea", "Paraguay", "Peru", "Philippines", "Poland",
+"Portugal", "Qatar", "Romania", "Russia", "Rwanda", "Saint Kitts and Nevis", "Saint Lucia", "Saint Vincent and the Grenadines",
+"Samoa", "San Marino", "Sao Tome and Principe", "Saudi Arabia", "Senegal", "Serbia", "Seychelles", "Sierra Leone", "Singapore",
+"Slovakia", "Slovenia", "Solomon Islands", "Somalia", "South Africa", "South Korea", "South Sudan", "Spain", "Sri Lanka", "Sudan",
+"Suriname", "Sweden", "Switzerland", "Syria", "Taiwan", "Tajikistan", "Tanzania", "Thailand", "Timor-Leste", "Togo", "Tonga",
+"Trinidad and Tobago", "Tunisia", "Turkey", "Turkmenistan", "Tuvalu", "Uganda", "Ukraine", "United Arab Emirates", "Uruguay",
+"Uzbekistan", "Vanuatu", "Vatican City", "Venezuela", "Vietnam", "Yemen", "Zambia", "Zimbabwe"
+        ];
+
+        function populateCountryDropdowns() {
+            const registerSelect = document.getElementById('register-country-select');
+            const reviewSelect = document.getElementById('review-country-select');
+            let optionsHtml = '';
+            
+            countryList.forEach(country => {
+                const isSelected = country === "Bangladesh" ? "selected" : "";
+                optionsHtml += `<option value="${country}" ${isSelected}>${country}</option>`;
+            });
+            
+            registerSelect.innerHTML = '<option value="">Select Country...</option>' + optionsHtml;
+            reviewSelect.innerHTML = '<option value="">Select Country...</option>' + optionsHtml;
+            
+            // Set default for registration
+            registerSelect.value = "Bangladesh";
+        }
+
+        // --- Utility Functions ---
+        function showModal(id) {
+            const modal = document.getElementById(id);
+            if (modal) {
+                modal.classList.remove('modal-hidden');
+                modal.classList.add('modal-visible');
+            }
+        }
+        function hideModal(id) {
+            const modal = document.getElementById(id);
+            if (modal) {
+                modal.classList.add('modal-hidden');
+                modal.classList.remove('modal-visible');
+            }
+        }
+        function showMessage(text, isError = false) {
+            const popup = document.getElementById('message-popup');
+            const messageText = document.getElementById('message-text');
+            messageText.textContent = text;
+            popup.classList.remove('hidden', 'border-red-400', 'border-cyan-400');
+            popup.classList.add(isError ? 'border-red-400' : 'border-cyan-400');
+            popup.classList.add('block');
+            setTimeout(() => {
+                popup.classList.add('hidden');
+                popup.classList.remove('block');
+            }, 3000);
+        }
+
+        // Page Navigation
+        const userWebsiteDiv = document.getElementById('user-website');
+        const adminPanelDiv = document.getElementById('admin-panel');
+        const mainContent = document.getElementById('main-content');
+        const reviewsPage = document.getElementById('reviews-page');
+        
+        function showPage(pageId) {
+            window.scrollTo(0, 0); // Scroll to top
+            if (pageId === 'reviews-page') {
+                mainContent.classList.add('hidden');
+                reviewsPage.classList.remove('hidden');
+            } else {
+                mainContent.classList.remove('hidden');
+                reviewsPage.classList.add('hidden');
+            }
+        }
+
+        function initNavigation() {
+            document.querySelectorAll('.nav-link').forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const sectionId = this.dataset.section;
+                    
+                    if (sectionId === 'reviews-page' || sectionId === 'main-content') {
+                        showPage(sectionId);
+                    } else {
+                        showPage('main-content');
+                        // Need a slight delay for the content to be visible before scrolling
+                        setTimeout(() => {
+                            const targetElement = document.getElementById(sectionId);
+                            if (targetElement) {
+                                targetElement.scrollIntoView({ behavior: 'smooth' });
+                            }
+                        }, 50);
+                    }
+                });
+            });
+            // Also add to logo/home
+            document.querySelector('.nav-home').addEventListener('click', (e) => {
+                e.preventDefault();
+                showPage('main-content');
+            });
+        }
+
+        // --- (NEW) Admin Panel Functions ---
+        
+        function showAdminPanel(user) {
+            isAdmin = true;
+            userWebsiteDiv.classList.add('hidden'); // Hide user website
+            adminPanelDiv.classList.remove('hidden'); // Show admin panel
+            document.getElementById('admin-email').textContent = user.email;
+            
+            // Init admin listeners
+            initAdminListeners();
+            
+            // Init admin UI event handlers
+            initAdminUI();
+        }
+        
+        function hideAdminPanel() {
+            isAdmin = false;
+            userWebsiteDiv.classList.remove('hidden'); // Show user website
+            adminPanelDiv.classList.add('hidden'); // Hide admin panel
+            
+            // Unsubscribe from all admin listeners
+            adminListeners.forEach(unsubscribe => unsubscribe());
+            adminListeners = [];
+        }
+        
+        function initAdminUI() {
+            // Tab switching
+            const adminTabBtns = document.querySelectorAll('.admin-tab-btn');
+            const adminTabs = document.querySelectorAll('.admin-tab-content');
+            adminTabBtns.forEach(btn => {
+                btn.addEventListener('click', () => {
+                    const tabId = btn.getAttribute('data-admin-tab');
+                    adminTabBtns.forEach(b => { b.classList.remove('bg-gray-700/50', 'text-cyan-400'); b.classList.add('text-gray-300', 'hover:bg-gray-700/30'); });
+                    btn.classList.add('bg-gray-700/50', 'text-cyan-400');
+                    btn.classList.remove('text-gray-300', 'hover:bg-gray-700/30');
+                    adminTabs.forEach(tab => {
+                        if (tab.id === `admin-tab-${tabId}`) { tab.classList.remove('hidden'); } else { tab.classList.add('hidden'); }
+                    });
+                });
+            });
+            
+            // Admin logout
+            document.getElementById('admin-logout-btn').addEventListener('click', () => {
+                signOut(auth);
+            });
+        }
+        
+        function initAdminListeners() {
+            // Clean up old listeners first
+            adminListeners.forEach(unsubscribe => unsubscribe());
+            adminListeners = [];
+
+            // 1. Listen for Fund Requests
+            const fundRequestsRef = collection(db, `/artifacts/${appId}/public/data/fund_requests`);
+            const qFunds = query(fundRequestsRef, where("status", "==", "Pending"));
+            const unsubFunds = onSnapshot(qFunds, (snapshot) => {
+                const list = document.getElementById('admin-fund-request-list');
+                document.getElementById('fund-request-count').textContent = snapshot.size;
+                if (snapshot.empty) {
+                    list.innerHTML = '<tr><td colspan="4" class="text-center text-gray-500 py-4">No pending fund requests.</td></tr>';
+                    return;
+                }
+                let html = '';
+                snapshot.docs.forEach(doc => {
+                    const req = doc.data();
+                    const date = req.createdAt ? new Date(req.createdAt.seconds * 1000).toLocaleDateString() : 'N/A';
+                    html += `
+                        <tr id="fund-req-${doc.id}">
+                            <td>${date}</td>
+                            <td>${req.userEmail}</td>
+                            <td class="font-bold text-green-400">$${req.amount.toFixed(2)}</td>
+                            <td>
+                                <button class="admin-approve-fund btn-primary text-xs px-2 py-1 rounded" data-id="${doc.id}" data-user-id="${req.userId}" data-amount="${req.amount}">Approve</button>
+                                <button class="admin-reject-fund btn-secondary text-red-400 text-xs px-2 py-1 rounded" data-id="${doc.id}">Reject</button>
+                            </td>
+                        </tr>
+                    `;
+                });
+                list.innerHTML = html;
+            });
+            adminListeners.push(unsubFunds);
+
+            // 2. Listen for All Orders
+            const ordersRef = collection(db, `/artifacts/${appId}/public/data/all_orders`);
+            const qOrders = query(ordersRef);
+            const unsubOrders = onSnapshot(qOrders, (snapshot) => {
+                const list = document.getElementById('admin-order-list');
+                if (snapshot.empty) {
+                    list.innerHTML = '<tr><td colspan="8" class="text-center text-gray-500 py-4">No orders found.</td></tr>';
+                    return;
+                }
+                let html = '';
+                // Sort by date descending
+                const docs = snapshot.docs.sort((a, b) => (b.data().createdAt?.seconds || 0) - (a.data().createdAt?.seconds || 0));
+                docs.forEach(doc => {
+                    const order = doc.data();
+                    const date = order.createdAt ? new Date(order.createdAt.seconds * 1000).toLocaleDateString() : 'N/A';
+                    const identifier = order.imei || order.serial || 'N/A';
+                    html += `
+                        <tr>
+                            <td>${date}</td>
+                            <td>${order.userEmail}</td>
+                            <td>${order.service}</td>
+                            <td>${identifier}</td>
+                            <td>${order.model}</td>
+                            <td>$${order.price.toFixed(2)}</td>
+                            <td>
+                                <select class="admin-order-status-change form-input text-xs py-1" data-id="${doc.id}" data-private-id="${order.privateOrderId}" data-user-id="${order.userId}">
+                                    <option value="Pending" ${order.status === 'Pending' ? 'selected' : ''}>Pending</option>
+                                    <option value="Processing" ${order.status === 'Processing' ? 'selected' : ''}>Processing</option>
+                                    <option value="Done" ${order.status === 'Done' ? 'selected' : ''}>Done</option>
+                                    <option value="Rejected" ${order.status === 'Rejected' ? 'selected' : ''}>Rejected</option>
+                                </select>
+                            </td>
+                            <td>
+                                <button class="admin-save-order-status btn-primary text-xs px-2 py-1 rounded" data-id="${doc.id}">Save</button>
+                            </td>
+                        </tr>
+                    `;
+                });
+                list.innerHTML = html;
+            });
+            adminListeners.push(unsubOrders);
+
+            // 3. Listen for IMEI Checks
+            const imeiChecksRef = collection(db, `/artifacts/${appId}/public/data/imei_checks`);
+            const qImei = query(imeiChecksRef);
+            const unsubImei = onSnapshot(qImei, (snapshot) => {
+                const list = document.getElementById('admin-imei-check-list');
+                document.getElementById('imei-check-count').textContent = snapshot.size;
+                if (snapshot.empty) {
+                    list.innerHTML = '<tr><td colspan="4" class="text-center text-gray-500 py-4">No IMEI checks found.</td></tr>';
+                    return;
+                }
+                let html = '';
+                const docs = snapshot.docs.sort((a, b) => (b.data().createdAt?.seconds || 0) - (a.data().createdAt?.seconds || 0));
+                
+                // (NEW) Detect duplicate emails
+                const emailCounts = {};
+                docs.forEach(doc => {
+                    const email = doc.data().email;
+                    emailCounts[email] = (emailCounts[email] || 0) + 1;
+                });
+                
+                docs.forEach(doc => {
+                    const check = doc.data();
+                    const date = check.createdAt ? new Date(check.createdAt.seconds * 1000).toLocaleDateString() : 'N/A';
+                    const isDuplicate = emailCounts[check.email] > 1;
+                    html += `
+                        <tr>
+                            <td><input type="checkbox" class="imei-check-item" data-id="${doc.id}"></td>
+                            <td>${date}</td>
+                            <td class="${isDuplicate ? 'email-duplicate' : ''}">${check.email}</td>
+                            <td>${check.imei}</td>
+                        </tr>
+                    `;
+                });
+                list.innerHTML = html;
+            });
+            adminListeners.push(unsubImei);
+            
+            // 4. Listen for Pending Reviews
+            const reviewsRef = collection(db, `/artifacts/${appId}/public/data/pending_reviews`);
+            const qReviews = query(reviewsRef, where("status", "==", "Pending"));
+            const unsubReviews = onSnapshot(qReviews, (snapshot) => {
+                const list = document.getElementById('admin-review-list');
+                document.getElementById('review-count').textContent = snapshot.size;
+                if (snapshot.empty) {
+                    list.innerHTML = '<tr><td colspan="6" class="text-center text-gray-500 py-4">No pending reviews.</td></tr>';
+                    return;
+                }
+                let html = '';
+                snapshot.docs.forEach(doc => {
+                    const review = doc.data();
+                    const date = review.createdAt ? new Date(review.createdAt.seconds * 1000).toLocaleDateString() : 'N/A';
+                    html += `
+                        <tr id="review-req-${doc.id}">
+                            <td>${date}</td>
+                            <td>${review.name}</td>
+                            <td>${review.country}</td>
+                            <td>${'&#9733;'.repeat(review.rating)}</td>
+                            <td>${review.comment}</td>
+                            <td>
+                                <button class="admin-approve-review btn-primary text-xs px-2 py-1 rounded" data-id="${doc.id}">Approve</button>
+                                <button class="admin-reject-review btn-secondary text-red-400 text-xs px-2 py-1 rounded" data-id="${doc.id}">Reject</button>
+                            </td>
+                        </tr>
+                    `;
+                });
+                list.innerHTML = html;
+            });
+            adminListeners.push(unsubReviews);
+
+            // 6. Listen for Live Reviews
+            const liveReviewsRef = collection(db, `/artifacts/${appId}/public/data/reviews`);
+            const qLiveReviews = query(liveReviewsRef);
+            const unsubLiveReviews = onSnapshot(qLiveReviews, (snapshot) => {
+                const list = document.getElementById('admin-live-review-list');
+                if (snapshot.empty) {
+                    list.innerHTML = '<tr><td colspan="6" class="text-center text-gray-500 py-4">No live reviews found.</td></tr>';
+                    return;
+                }
+                let html = '';
+                const docs = snapshot.docs.sort((a, b) => (b.data().approvedAt?.seconds || 0) - (a.data().approvedAt?.seconds || 0));
+                docs.forEach(doc => {
+                    const review = doc.data();
+                    const date = review.approvedAt ? new Date(review.approvedAt.seconds * 1000).toLocaleDateString() : 'N/A';
+                    html += `
+                        <tr id="live-review-${doc.id}">
+                            <td>${date}</td>
+                            <td>${review.name}</td>
+                            <td>${review.country}</td>
+                            <td>${'&#9733;'.repeat(review.rating)}</td>
+                            <td>${review.comment}</td>
+                            <td>
+                                <button class="admin-delete-review btn-secondary text-red-400 text-xs px-2 py-1 rounded" data-id="${doc.id}">Delete</button>
+                            </td>
+                        </tr>
+                    `;
+                });
+                list.innerHTML = html;
+            });
+            adminListeners.push(unsubLiveReviews);
+
+            // 5. Listen for User List
+            const usersRef = collection(db, `/artifacts/${appId}/public/data/all_users`);
+            const qUsers = query(usersRef);
+            const unsubUsers = onSnapshot(qUsers, (snapshot) => {
+                const list = document.getElementById('admin-user-list');
+                if (snapshot.empty) {
+                    list.innerHTML = '<tr><td colspan="6" class="text-center text-gray-500 py-4">No users found.</td></tr>';
+                    return;
+                }
+                let html = '';
+                snapshot.docs.forEach(doc => {
+                    const user = doc.data();
+                    // Skip admin from user list
+                    if (user.email === ADMIN_EMAIL) return;
+                    
+                    html += `
+                        <tr>
+                            <td>${user.name || 'N/A'}</td>
+                            <td>${user.email}</td>
+                            <td>${user.country || 'N/A'}</td>
+                            <td>${user.phone || 'N/A'}</td>
+                            <td>${user.whatsapp || 'N/A'}</td>
+                            <td class="font-bold text-green-400">$${user.balance ? user.balance.toFixed(2) : '0.00'}</td>
+                            <td>
+                                <button class="admin-add-fund-btn btn-primary text-xs px-2 py-1 rounded" data-id="${doc.id}" data-email="${user.email}">Add Fund</button>
+                                <button class="admin-delete-user-btn btn-secondary text-red-400 text-xs px-2 py-1 rounded mt-1" data-id="${doc.id}">Delete</button>
+                            </td>
+                        </tr>
+                    `;
+                });
+                list.innerHTML = html;
+            });
+            adminListeners.push(unsubUsers);
+        }
+        
+        // --- Admin Action Handlers (using event delegation) ---
+        
+        document.getElementById('admin-panel').addEventListener('click', async (e) => {
+            const target = e.target;
+            
+            // --- Approve Fund Request ---
+            if (target.classList.contains('admin-approve-fund')) {
+                const reqId = target.dataset.id;
+                const userId = target.dataset.userId;
+                const amount = parseFloat(target.dataset.amount);
+                target.disabled = true;
+                target.textContent = 'Approving...';
+                
+                try {
+                    const userProfileRef = doc(db, `/artifacts/${appId}/users/${userId}/profile/data`);
+                    const requestRef = doc(db, `/artifacts/${appId}/public/data/fund_requests/${reqId}`);
+                    
+                    // Use a batch write to ensure both operations succeed or fail together
+                    const batch = writeBatch(db);
+                    batch.update(userProfileRef, { balance: increment(amount) });
+                    batch.update(requestRef, { status: "Approved" });
+                    await batch.commit();
+                    
+                    showMessage('Fund approved and balance updated!');
+                } catch (err) {
+                    console.error("Error approving fund:", err);
+                    showMessage('Error approving fund.', true);
+                    target.disabled = false;
+                    target.textContent = 'Approve';
+                }
+            }
+            
+            // --- Reject Fund Request ---
+            if (target.classList.contains('admin-reject-fund')) {
+                const reqId = target.dataset.id;
+                target.disabled = true;
+                target.parentElement.textContent = 'Rejecting...';
+                
+                try {
+                    const requestRef = doc(db, `/artifacts/${appId}/public/data/fund_requests/${reqId}`);
+                    await updateDoc(requestRef, { status: "Rejected" });
+                    showMessage('Fund request rejected.');
+                } catch (err) {
+                    console.error("Error rejecting fund:", err);
+                    showMessage('Error rejecting fund.', true);
+                }
+            }
+            
+            // --- Save Order Status ---
+            if (target.classList.contains('admin-save-order-status')) {
+                const selectEl = target.closest('tr').querySelector('.admin-order-status-change');
+                const newStatus = selectEl.value;
+                const publicOrderId = selectEl.dataset.id;
+                const privateOrderId = selectEl.dataset.privateId;
+                const userId = selectEl.dataset.userId;
+                
+                target.disabled = true;
+                target.textContent = 'Saving...';
+                
+                try {
+                    const publicOrderRef = doc(db, `/artifacts/${appId}/public/data/all_orders/${publicOrderId}`);
+                    const privateOrderRef = doc(db, `/artifacts/${appId}/users/${userId}/orders/${privateOrderId}`);
+                    
+                    const batch = writeBatch(db);
+                    batch.update(publicOrderRef, { status: newStatus });
+                    batch.update(privateOrderRef, { status: newStatus });
+                    await batch.commit();
+                    
+                    showMessage('Order status updated!');
+                } catch (err) {
+                    console.error("Error updating status:", err);
+                    showMessage('Error updating status.', true);
+                } finally {
+                    target.disabled = false;
+                    target.textContent = 'Save';
+                }
+            }
+            
+            // --- Approve Review ---
+            if (target.classList.contains('admin-approve-review')) {
+                const reqId = target.dataset.id;
+                target.disabled = true;
+                target.textContent = 'Approving...';
+                
+                try {
+                    const pendingReviewRef = doc(db, `/artifacts/${appId}/public/data/pending_reviews/${reqId}`);
+                    const reviewData = (await getDoc(pendingReviewRef)).data();
+                    
+                    // 1. Add to public "reviews" collection
+                    const publicReviewRef = collection(db, `/artifacts/${appId}/public/data/reviews`);
+                    await addDoc(publicReviewRef, {
+                        ...reviewData,
+                        status: "Approved",
+                        approvedAt: serverTimestamp()
+                    });
+                    
+                    // 2. Delete from "pending_reviews"
+                    await deleteDoc(pendingReviewRef);
+                    
+                    showMessage('Review approved and published!');
+                } catch (err) {
+                    console.error("Error approving review:", err);
+                    showMessage('Error approving review.', true);
+                    target.disabled = false;
+                    target.textContent = 'Approve';
+                }
+            }
+            
+            // --- Reject Review ---
+            if (target.classList.contains('admin-reject-review')) {
+                const reqId = target.dataset.id;
+                target.disabled = true;
+                target.parentElement.textContent = 'Rejecting...';
+                
+                try {
+                    const pendingReviewRef = doc(db, `/artifacts/${appId}/public/data/pending_reviews/${reqId}`);
+                    await deleteDoc(pendingReviewRef); // Just delete it
+                    showMessage('Review rejected.');
+                } catch (err) {
+                    console.error("Error rejecting review:", err);
+                    showMessage('Error rejecting review.', true);
+                }
+            }
+            
+            // --- Delete Live Review ---
+            if (target.classList.contains('admin-delete-review')) {
+                const reviewId = target.dataset.id;
+                if (!confirm('Are you sure you want to delete this review permanently?')) {
+                    return;
+                }
+                target.disabled = true;
+                target.textContent = 'Deleting...';
+                
+                try {
+                    const reviewRef = doc(db, `/artifacts/${appId}/public/data/reviews/${reviewId}`);
+                    await deleteDoc(reviewRef);
+                    showMessage('Review deleted successfully.');
+                } catch (err) {
+                    console.error("Error deleting review:", err);
+                    showMessage('Error deleting review.', true);
+                    target.disabled = false;
+                    target.textContent = 'Delete';
+                }
+            }
+            
+            // --- Select All IMEI Checks ---
+            if (target.id === 'select-all-imei') {
+                document.querySelectorAll('.imei-check-item').forEach(checkbox => {
+                    checkbox.checked = target.checked;
+                });
+            }
+            
+            // --- Delete Selected IMEI Checks ---
+            if (target.id === 'delete-selected-imei-btn') {
+                const selectedCheckboxes = document.querySelectorAll('.imei-check-item:checked');
+                if (selectedCheckboxes.length === 0) {
+                    showMessage('Please select IMEI checks to delete.', true);
+                    return;
+                }
+                
+                if (!confirm(`Are you sure you want to delete ${selectedCheckboxes.length} IMEI check(s)?`)) {
+                    return;
+                }
+                
+                target.disabled = true;
+                target.textContent = 'Deleting...';
+                
+                try {
+                    const batch = writeBatch(db);
+                    selectedCheckboxes.forEach(checkbox => {
+                        const docId = checkbox.dataset.id;
+                        const docRef = doc(db, `/artifacts/${appId}/public/data/imei_checks/${docId}`);
+                        batch.delete(docRef);
+                    });
+                    await batch.commit();
+                    showMessage(`Successfully deleted ${selectedCheckboxes.length} item(s).`);
+                } catch (err) {
+                    console.error("Error deleting IMEI checks:", err);
+                    showMessage('Error deleting items.', true);
+                } finally {
+                    target.disabled = false;
+                    target.textContent = 'Delete Selected';
+                    document.getElementById('select-all-imei').checked = false;
+                }
+            }
+
+            // --- Admin Add Fund to User ---
+            if (target.classList.contains('admin-add-fund-btn')) {
+                const userId = target.dataset.id;
+                const userEmail = target.dataset.email;
+                document.getElementById('admin-add-fund-user-id').value = userId;
+                document.getElementById('admin-add-fund-user-email').textContent = userEmail;
+                showModal('admin-add-fund-modal');
+            }
+
+            // --- Admin Delete User ---
+            if (target.classList.contains('admin-delete-user-btn')) {
+                const userId = target.dataset.id;
+                if (!confirm(`Are you sure you want to permanently delete this user and all their data? This action cannot be undone.`)) {
+                    return;
+                }
+                target.disabled = true;
+                target.textContent = 'Deleting...';
+
+                try {
+                    const batch = writeBatch(db);
+                    const publicUserRef = doc(db, `/artifacts/${appId}/public/data/all_users/${userId}`);
+                    const privateUserRef = doc(db, `/artifacts/${appId}/users/${userId}/profile/data`);
+                    
+                    batch.delete(publicUserRef);
+                    batch.delete(privateUserRef);
+                    
+                    await batch.commit();
+                    showMessage('User deleted successfully.');
+                } catch (err) {
+                    console.error("Error deleting user:", err);
+                    showMessage('Error deleting user.', true);
+                    target.disabled = false;
+                    target.textContent = 'Delete';
+                }
+            }
+        });
+
+        document.getElementById('admin-add-fund-modal-close').addEventListener('click', () => hideModal('admin-add-fund-modal'));
+
+        document.getElementById('admin-add-fund-form').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const userId = document.getElementById('admin-add-fund-user-id').value;
+            const amount = parseFloat(document.getElementById('admin-fund-amount').value);
+            const errorDiv = document.getElementById('admin-add-fund-error');
+            const submitBtn = document.getElementById('admin-confirm-add-fund-btn');
+
+            if (isNaN(amount) || amount <= 0) {
+                errorDiv.textContent = 'Please enter a valid positive amount.';
+                errorDiv.classList.remove('hidden');
+                return;
+            }
+
+            submitBtn.disabled = true;
+            submitBtn.textContent = 'Adding...';
+            errorDiv.classList.add('hidden');
+
+            try {
+                const publicUserRef = doc(db, `/artifacts/${appId}/public/data/all_users/${userId}`);
+                const privateUserRef = doc(db, `/artifacts/${appId}/users/${userId}/profile/data`);
+
+                const batch = writeBatch(db);
+                batch.update(publicUserRef, { balance: increment(amount) });
+                batch.update(privateUserRef, { balance: increment(amount) });
+                await batch.commit();
+
+                showMessage(`$${amount.toFixed(2)} added successfully!`);
+                hideModal('admin-add-fund-modal');
+                document.getElementById('admin-add-fund-form').reset();
+            } catch (err) {
+                console.error("Error adding fund:", err);
+                errorDiv.textContent = 'Failed to add funds. Please try again.';
+                errorDiv.classList.remove('hidden');
+            } finally {
+                submitBtn.disabled = false;
+                submitBtn.textContent = 'Confirm & Add Fund';
+            }
+        });
+        
+        // --- (END) Admin Panel Functions ---
+
+
+        // --- UI Update Functions ---
+        function updateUIAfterLogin(user) {
+            document.getElementById('logged-out-nav').classList.add('hidden');
+            document.getElementById('logged-in-nav').classList.remove('hidden');
+            document.getElementById('dashboard-user-email').textContent = user.email;
+            document.getElementById('review-form').classList.remove('hidden');
+            document.getElementById('login-to-review').classList.add('hidden');
+            hideModal('auth-modal');
+        }
+
+        function updateUIAfterLogout() {
+            document.getElementById('logged-out-nav').classList.remove('hidden');
+            document.getElementById('logged-in-nav').classList.add('hidden');
+            document.getElementById('user-balance-nav').textContent = 'Balance: $0.00';
+            document.getElementById('dashboard-balance').textContent = '$0.00';
+            document.getElementById('order-history-list').innerHTML = '<p class="text-gray-500 text-center">Please login to see your orders.</p>';
+            document.getElementById('fund-history-list').innerHTML = '<p class="text-gray-500 text-center">Please login to see your requests.</p>';
+            document.getElementById('profile-details').innerHTML = '<p class="text-gray-500">Please login to see profile.</p>';
+            document.getElementById('review-form').classList.add('hidden');
+            document.getElementById('login-to-review').classList.remove('hidden');
+            document.getElementById('review-order-select').innerHTML = '<option value="">Login to see your orders...</option>';
+        }
+
+        // --- Firebase Data Functions ---
+        async function createUserProfile(user, extraData = {}) {
+            const userProfileRef = doc(db, `/artifacts/${appId}/users/${user.uid}/profile/data`);
+            // (NEW) Create a public-facing copy for the admin panel
+            const publicUserRef = doc(db, `/artifacts/${appId}/public/data/all_users/${user.uid}`);
+            
+            const profileData = {
+                email: user.email,
+                balance: 0,
+                createdAt: serverTimestamp(),
+                name: extraData.name || '',
+                phone: extraData.phone || '',
+                whatsapp: extraData.whatsapp || '',
+                country: extraData.country || ''
+            };
+            
+            try {
+                // Set private profile
+                await setDoc(userProfileRef, profileData);
+                // Set public profile
+                await setDoc(publicUserRef, profileData);
+                console.log("User profile created (private and public).");
+            } catch (e) {
+                console.error("Error creating user profile: ", e);
+            }
+        }
+
+        function fetchUserProfile(userId) {
+            if (userProfileUnsubscribe) userProfileUnsubscribe(); 
+            const userProfileRef = doc(db, `/artifacts/${appId}/users/${userId}/profile/data`);
+            const publicUserRef = doc(db, `/artifacts/${appId}/public/data/all_users/${userId}`);
+            
+            userProfileUnsubscribe = onSnapshot(userProfileRef, (docSnap) => {
+                const profileDetailsDiv = document.getElementById('profile-details');
+                if (docSnap.exists()) {
+                    currentUserProfile = docSnap.data();
+                    currentUserBalance = currentUserProfile.balance;
+                    const formattedBalance = `$${currentUserBalance.toFixed(2)}`;
+                    document.getElementById('user-balance-nav').textContent = `Balance: ${formattedBalance}`;
+                    document.getElementById('dashboard-balance').textContent = formattedBalance;
+                    profileDetailsDiv.innerHTML = `
+                        <p><span class="font-semibold text-gray-400">Name:</span> ${currentUserProfile.name || 'N/A'}</p>
+                        <p><span class="font-semibold text-gray-400">Email:</span> ${currentUserProfile.email}</p>
+                        <p><span class="font-semibold text-gray-400">Country:</span> ${currentUserProfile.country || 'N/A'}</p>
+                        <p><span class="font-semibold text-gray-400">Phone:</span> ${currentUserProfile.phone || 'N/A'}</p>
+                        <p><span class="font-semibold text-gray-400">WhatsApp:</span> ${currentUserProfile.whatsapp || 'N/A'}</p>
+                    `;
+                    // Auto-fill review form
+                    document.getElementById('review-name').value = currentUserProfile.name || 'Anonymous User';
+                    document.getElementById('review-country-select').value = currentUserProfile.country || '';
+                    
+                    // (NEW) Sync public profile copy
+                    setDoc(publicUserRef, currentUserProfile, { merge: true }).catch(err => console.error("Failed to sync public user profile:", err));
+                    
+                } else {
+                    console.log("No user profile found, creating one...");
+                    createUserProfile({ uid: userId, email: currentUser.email });
+                    profileDetailsDiv.innerHTML = '<p>Loading profile...</p>';
+                }
+            }, (error) => {
+                console.error("Error fetching user profile:", error);
+                profileDetailsDiv.innerHTML = '<p class="text-red-400">Could not load profile.</p>';
+            });
+        }
+
+        function fetchOrderHistory(userId) {
+            if (orderHistoryUnsubscribe) orderHistoryUnsubscribe(); 
+            const ordersCollectionRef = collection(db, `/artifacts/${appId}/users/${userId}/orders`);
+            const q = query(ordersCollectionRef); 
+            const historyList = document.getElementById('order-history-list');
+            const reviewOrderSelect = document.getElementById('review-order-select');
+            
+            orderHistoryUnsubscribe = onSnapshot(q, (querySnapshot) => {
+                let historyHtml = '';
+                let reviewOptionsHtml = '<option value="">Select your completed order...</option>';
+                let hasReviewableOrders = false;
+                
+                if (querySnapshot.empty) {
+                    historyList.innerHTML = '<p class="text-gray-500 text-center">No orders found.</p>';
+                    reviewOrderSelect.innerHTML = '<option value="">No completed orders found.</option>';
+                    return;
+                }
+                
+                const docs = querySnapshot.docs.sort((a, b) => (b.data().createdAt?.seconds || 0) - (a.data().createdAt?.seconds || 0));
+                
+                docs.forEach((doc) => {
+                    const order = doc.data();
+                    const date = order.createdAt ? new Date(order.createdAt.seconds * 1000).toLocaleDateString() : 'N/A';
+                    let statusColor = 'text-yellow-400';
+
+                    if (order.status === 'Processing') statusColor = 'text-blue-400';
+                    if (order.status === 'Done' || order.status === 'Completed') {
+                        statusColor = 'text-green-400';
+                        if (!order.reviewed) {
+                            reviewOptionsHtml += `<option value="${doc.id}" data-model="${order.model}">${order.service} - ${order.model}</option>`;
+                            hasReviewableOrders = true;
+                        }
+                    }
+                    if (order.status === 'Cancelled' || order.status === 'Rejected') statusColor = 'text-red-400';
+                    
+                    const identifierHtml = order.imei ? `<p class="text-sm text-gray-400">IMEI: ${order.imei}</p>` : (order.serial ? `<p class="text-sm text-gray-400">Serial: ${order.serial}</p>` : '');
+
+                    historyHtml += `
+                        <div class="glass-card p-4 rounded-lg flex flex-col md:flex-row justify-between items-start md:items-center">
+                            <div>
+                                <p class="text-lg font-semibold text-white">${order.service}</p>
+                                <p class="text-sm text-gray-400">Model: ${order.model}</p>
+                                ${identifierHtml}
+                                <p class="text-xs text-gray-500">Date: ${date}</p>
+                            </div>
+                            <div class="mt-2 md:mt-0 text-right">
+                                <p class="text-lg font-bold text-white">$${parseFloat(order.price).toFixed(2)}</p>
+                                <p class="font-semibold ${statusColor}">${order.status}</p>
+                            </div>
+                        </div>
+                    `;
+                });
+                
+                historyList.innerHTML = historyHtml || '<p class="text-gray-500 text-center">No orders found.</p>';
+                if (!hasReviewableOrders) {
+                    reviewOptionsHtml = '<option value="">No reviewable orders found.</option>';
+                }
+                reviewOrderSelect.innerHTML = reviewOptionsHtml;
+
+            }, (error) => {
+                console.error("Error fetching order history: ", error);
+                historyList.innerHTML = '<p class="text-red-500 text-center">Could not load orders.</p>';
+            });
+        }
+        
+        // (NEW) Fetch Fund Request History
+        function fetchFundHistory(userId) {
+            if (fundHistoryUnsubscribe) fundHistoryUnsubscribe(); 
+            const fundsCollectionRef = collection(db, `/artifacts/${appId}/public/data/fund_requests`);
+            const q = query(fundsCollectionRef, where("userId", "==", userId));
+            const historyList = document.getElementById('fund-history-list');
+
+            fundHistoryUnsubscribe = onSnapshot(q, (querySnapshot) => {
+                let historyHtml = '';
+                if (querySnapshot.empty) {
+                    historyList.innerHTML = '<p class="text-gray-500 text-center">No fund requests found.</p>';
+                    return;
+                }
+                
+                const docs = querySnapshot.docs.sort((a, b) => (b.data().createdAt?.seconds || 0) - (a.data().createdAt?.seconds || 0));
+                
+                docs.forEach((doc) => {
+                    const req = doc.data();
+                    const date = req.createdAt ? new Date(req.createdAt.seconds * 1000).toLocaleDateString() : 'N/A';
+                    let statusColor = 'text-yellow-400'; // Pending
+                    if (req.status === 'Approved') statusColor = 'text-green-400';
+                    if (req.status === 'Rejected') statusColor = 'text-red-400';
+
+                    historyHtml += `
+                        <div class="glass-card p-4 rounded-lg flex justify-between items-center">
+                            <div>
+                                <p class="text-lg font-semibold text-white">Fund Request</p>
+                                <p class="text-xs text-gray-500">Date: ${date}</p>
+                            </div>
+                            <div class="text-right">
+                                <p class="text-lg font-bold text-green-400">$${req.amount.toFixed(2)}</p>
+                                <p class="font-semibold ${statusColor}">${req.status}</p>
+                            </div>
+                        </div>
+                    `;
+                });
+                historyList.innerHTML = historyHtml;
+            }, (error) => {
+                console.error("Error fetching fund history: ", error);
+                historyList.innerHTML = '<p class="text-red-500 text-center">Could not load fund requests.</p>';
+            });
+        }
+        
+        // (UPDATED) fetchPublicReviews logic
+        function fetchPublicReviews() {
+            const reviewsCollectionRef = collection(db, `/artifacts/${appId}/public/data/reviews`);
+            const q = query(reviewsCollectionRef);
+            const listContainer = document.getElementById('review-list-container');
+            const loadingMsg = document.getElementById('review-loading-msg');
+
+            onSnapshot(q, (querySnapshot) => {
+                if (querySnapshot.empty) {
+                    loadingMsg.textContent = 'No new customer reviews yet.';
+                    return;
+                }
+                
+                let html = '';
+                const docs = querySnapshot.docs.sort((a, b) => (b.data().createdAt?.seconds || 0) - (a.data().createdAt?.seconds || 0));
+
+                docs.forEach((doc) => {
+                    const review = doc.data();
+                    const date = review.createdAt ? new Date(review.createdAt.seconds * 1000).toLocaleDateString() : '';
+                    
+                    let starsHtml = '';
+                    const rating = parseInt(review.rating, 10);
+                    for(let i = 1; i <= 5; i++) {
+                        starsHtml += `<i class="ph-fill ph-star text-${i <= rating ? 'yellow-400' : 'gray-600'}"></i>`;
+                    }
+
+                    html += `
+                        <div class="glass-card p-6">
+                            <div class="flex justify-between items-center mb-2">
+                                <div class="flex items-center">
+                                    <div class="w-10 h-10 rounded-full bg-cyan-900/50 flex items-center justify-center mr-3 border border-cyan-700">
+                                        <span class="text-xl font-bold text-cyan-400">${review.name.charAt(0) || 'U'}</span>
+                                    </div>
+                                    <div>
+                                        <p class="font-semibold text-white">${review.name}</p>
+                                        <p class="text-sm text-gray-400">${review.country || 'Unknown Location'}</p>
+                                    </div>
+                                </div>
+                                <div class="flex text-lg">${starsHtml}</div>
+                            </div>
+                            <p class="text-gray-300 mt-4"><span class="text-gray-500">Reviewed: ${review.orderModel}</span><br>${review.comment}</p>
+                            <p class="text-xs text-gray-500 text-right mt-2">${date}</p>
+                        </div>
+                    `;
+                });
+                
+                listContainer.innerHTML = html; // Insert dynamic reviews
+                loadingMsg.classList.add('hidden'); // Hide loading message
+
+            }, (error) => {
+                console.error("Error fetching reviews: ", error);
+                loadingMsg.textContent = 'Could not load reviews.';
+                loadingMsg.classList.add('text-red-400');
+            });
+        }
+        
+        // --- Auth Event Handlers ---
+        function initAuth() {
+            auth = getAuth(app);
+            onAuthStateChanged(auth, (user) => {
+                // (NEW) Admin Panel Redirect Logic
+                if (user && user.email === ADMIN_EMAIL) {
+                    console.log("Admin user logged in. Initializing Admin Panel...");
+                    currentUser = user; // Set current user as admin
+                    showAdminPanel(user);
+                    return; // Stop normal user execution
+                }
+
+                if (user && !user.isAnonymous) { 
+                    console.log("Regular user logged in.");
+                    // If admin was logged in, hide admin panel
+                    if (isAdmin) hideAdminPanel(); 
+                    
+                    currentUser = user;
+                    currentUserId = user.uid;
+                    updateUIAfterLogin(user);
+                    fetchUserProfile(currentUserId);
+                    fetchOrderHistory(currentUserId);
+                    fetchFundHistory(currentUserId); 
+                } else {
+                    console.log("User logged out or is anonymous.");
+                    // If admin was logged in, hide admin panel
+                    if (isAdmin) hideAdminPanel(); 
+
+                    currentUser = null;
+                    currentUserId = null;
+                    currentUserProfile = {};
+                    updateUIAfterLogout();
+                    
+                    // Clean up user-specific listeners
+                    if (userProfileUnsubscribe) userProfileUnsubscribe();
+                    if (orderHistoryUnsubscribe) orderHistoryUnsubscribe();
+                    if (fundHistoryUnsubscribe) fundHistoryUnsubscribe(); 
+                    
+                    const token = typeof __initial_auth_token !== 'undefined' ? __initial_auth_token : null;
+                    if (!token && (!auth.currentUser || auth.currentUser.isAnonymous)) {
+                         signInAnonymously(auth).catch(err => console.error("Anonymous sign-in failed:", err));
+                    }
+                }
+            });
+            const token = typeof __initial_auth_token !== 'undefined' ? __initial_auth_token : null;
+            if (token) {
+                signInWithCustomToken(auth, token).catch((error) => {
+                    console.error("Custom token sign-in failed:", error);
+                    signInAnonymously(auth).catch(err => console.error("Anonymous sign-in failed:", err));
+                });
+            } else if (!auth.currentUser) {
+                signInAnonymously(auth).catch(err => console.error("Anonymous sign-in failed:", err));
+            }
+        }
+        
+        document.getElementById('login-form').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const email = document.getElementById('login-email').value;
+            const password = document.getElementById('login-password').value;
+            const errorDiv = document.getElementById('auth-error');
+            try {
+                await signInWithEmailAndPassword(auth, email, password);
+                errorDiv.classList.add('hidden');
+                showMessage('Login successful!');
+                // Auth state change will handle the rest (including admin redirect)
+            } catch (error) {
+                errorDiv.textContent = error.message;
+                errorDiv.classList.remove('hidden');
+            }
+        });
+        
+        document.getElementById('register-form').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const email = document.getElementById('register-email').value;
+            const password = document.getElementById('register-password').value;
+            const name = document.getElementById('register-name').value;
+            const phone = document.getElementById('register-phone').value;
+            const whatsapp = document.getElementById('register-whatsapp').value;
+            const country = document.getElementById('register-country-select').value; // (UPDATED)
+            const errorDiv = document.getElementById('auth-error');
+            try {
+                const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+                const extraData = { name, phone, whatsapp, country }; 
+                await createUserProfile(userCredential.user, extraData);
+                errorDiv.classList.add('hidden');
+                showMessage('Registration successful!');
+            } catch (error) {
+                errorDiv.textContent = error.message;
+                errorDiv.classList.remove('hidden');
+            }
+        });
+        
+        document.getElementById('logout-btn').addEventListener('click', () => {
+            signOut(auth);
+            showMessage('Logged out successfully.');
+        });
+        
+        // --- Modal & UI Event Handlers ---
+        document.getElementById('login-btn').addEventListener('click', () => {
+            document.getElementById('login-tab').click();
+            showModal('auth-modal');
+        });
+        document.getElementById('register-btn').addEventListener('click', () => {
+            document.getElementById('register-tab').click();
+            showModal('auth-modal');
+        });
+        document.getElementById('auth-modal-close').addEventListener('click', () => hideModal('auth-modal'));
+        document.getElementById('login-btn-from-review').addEventListener('click', () => {
+            document.getElementById('login-tab').click();
+            showModal('auth-modal');
+        });
+
+        const loginTab = document.getElementById('login-tab');
+        const registerTab = document.getElementById('register-tab');
+        const loginForm = document.getElementById('login-form');
+        const registerForm = document.getElementById('register-form');
+        const authError = document.getElementById('auth-error');
+
+        loginTab.addEventListener('click', () => {
+            loginTab.classList.add('border-cyan-400', 'text-white');
+            loginTab.classList.remove('border-transparent', 'text-gray-500');
+            registerTab.classList.add('border-transparent', 'text-gray-500');
+            registerTab.classList.remove('border-cyan-400', 'text-white');
+            loginForm.classList.remove('hidden');
+            registerForm.classList.add('hidden');
+            authError.classList.add('hidden');
+        });
+        registerTab.addEventListener('click', () => {
+            registerTab.classList.add('border-cyan-400', 'text-white');
+            registerTab.classList.remove('border-transparent', 'text-gray-500');
+            loginTab.classList.add('border-transparent', 'text-gray-500');
+            loginTab.classList.remove('border-cyan-400', 'text-white');
+            registerForm.classList.remove('hidden');
+            loginForm.classList.add('hidden');
+            authError.classList.add('hidden');
+        });
+
+        document.getElementById('dashboard-btn').addEventListener('click', () => showModal('dashboard-modal'));
+        document.getElementById('dashboard-modal-close').addEventListener('click', () => hideModal('dashboard-modal'));
+        
+        const dashboardTabBtns = document.querySelectorAll('.dashboard-tab-btn');
+        const dashboardTabs = document.querySelectorAll('.dashboard-tab-content');
+
+        dashboardTabBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                const tabId = btn.getAttribute('data-tab');
+                dashboardTabBtns.forEach(b => { b.classList.remove('bg-gray-700/50', 'text-cyan-400'); b.classList.add('text-gray-300', 'hover:bg-gray-700/30'); });
+                btn.classList.add('bg-gray-700/50', 'text-cyan-400');
+                btn.classList.remove('text-gray-300', 'hover:bg-gray-700/30');
+                dashboardTabs.forEach(tab => {
+                    if (tab.id === `tab-${tabId}`) { tab.classList.remove('hidden'); } else { tab.classList.add('hidden'); }
+                });
+            });
+        });
+
+        // --- Core Feature Logic (IMEI, Funds, Order) ---
+        
+        // (NEW) IMEI CHECKER (Admin Panel Integration)
+        function isValidEmail(email) {
+            const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+            return re.test(String(email).toLowerCase());
+        }
+
+        async function submitImeiCheck(imei, email) {
+            const resultDiv = document.getElementById('imei-result');
+            const checkBtn = document.getElementById('submit-imei-check-btn');
+            
+            // 1. Check if IMEI already exists
+            const imeiCheckRef = collection(db, `/artifacts/${appId}/public/data/imei_checks`);
+            const q = query(imeiCheckRef, where("imei", "==", imei));
+            
+            try {
+                const querySnapshot = await getDocs(q);
+                if (!querySnapshot.empty) {
+                    resultDiv.innerHTML = '<p class="text-red-400">This IMEI has already been checked.</p>';
+                    checkBtn.disabled = false;
+                    checkBtn.innerHTML = 'Check IMEI';
+                    return;
+                }
+            
+                // 2. If new, add to database
+                await addDoc(imeiCheckRef, {
+                    imei: imei,
+                    email: email,
+                    createdAt: serverTimestamp(),
+                    status: "Pending" // For admin panel
+                });
+                
+                // Success
+                resultDiv.innerHTML = `
+                    <div class="text-green-400 space-y-2">
+                        <h4 class="text-lg font-semibold">Request Submitted!</h4>
+                        <p>Your phone's status report will be emailed to <strong>${email}</strong>.</p>
+                        <p class="text-sm">Please check your spam/junk folder if you don't see it.</p>
+                    </div>
+                `;
+                document.getElementById('imei-check-input').value = '';
+                document.getElementById('imei-email-input').value = '';
+                
+            } catch (error) {
+                console.error('Error submitting IMEI check:', error);
+                resultDiv.innerHTML = '<p class="text-red-400">An error occurred. Please try again later.</p>';
+            } finally {
+                checkBtn.disabled = false;
+                checkBtn.innerHTML = 'Check IMEI';
+            }
+        }
+        
+        document.getElementById('submit-imei-check-btn').addEventListener('click', async () => {
+            const imeiInput = document.getElementById('imei-check-input');
+            const emailInput = document.getElementById('imei-email-input');
+            const resultDiv = document.getElementById('imei-result');
+            const checkBtn = document.getElementById('submit-imei-check-btn');
+
+            const imei = imeiInput.value.trim();
+            const email = emailInput.value.trim();
+            
+            let isValid = true;
+            resultDiv.innerHTML = ''; // Clear previous errors
+            
+            // Validation
+            if (!imei) {
+                resultDiv.innerHTML = '<p class="text-red-400">Please enter your IMEI number.</p>';
+                isValid = false;
+            } else if (imei.length < 15) {
+                resultDiv.innerHTML = '<p class="text-red-400">IMEI should be at least 15 digits.</p>';
+                isValid = false;
+            } else if (!email) {
+                resultDiv.innerHTML = '<p class="text-red-400">Please enter your email address.</p>';
+                isValid = false;
+            } else if (!isValidEmail(email)) {
+                resultDiv.innerHTML = '<p class="text-red-400">Please enter a valid email address.</p>';
+                isValid = false;
+            }
+
+            if (!isValid) return;
+
+            // Loading state
+            checkBtn.disabled = true;
+            checkBtn.innerHTML = 'Processing...';
+            resultDiv.innerHTML = '<p class="text-blue-400">Submitting your request...</p>';
+
+            // Call the function
+            await submitImeiCheck(imei, email);
+        });
+        // (END) IMEI CHECKER
+
+        // (UPDATED) Add Fund Request
+        document.getElementById('add-fund-btn').addEventListener('click', async () => {
+            const amountInput = document.getElementById('fund-amount');
+            const messageP = document.getElementById('fund-message');
+            const amount = parseFloat(amountInput.value);
+            
+            if (!currentUserId) { showMessage('Please login first', true); return; }
+            
+            if (!amount || amount <= 0) {
+                messageP.textContent = 'Please enter a valid amount.';
+                messageP.className = 'text-red-400 text-center mt-4';
+                return;
+            }
+            
+            messageP.textContent = 'Submitting request...';
+            messageP.className = 'text-blue-400 text-center mt-4';
+            
+            try {
+                // Submit request to a public collection for admin to see
+                const fundRequestsRef = collection(db, `/artifacts/${appId}/public/data/fund_requests`);
+                await addDoc(fundRequestsRef, {
+                    userId: currentUserId,
+                    userEmail: currentUser.email,
+                    amount: amount,
+                    status: "Pending",
+                    createdAt: serverTimestamp()
+                });
+                
+                messageP.textContent = `Request for $${amount.toFixed(2)} submitted!`;
+                messageP.className = 'text-green-400 text-center mt-4';
+                amountInput.value = '';
+                showMessage(`Fund request for $${amount.toFixed(2)} submitted.`);
+                
+            } catch (error) {
+                console.error("Error submitting fund request: ", error);
+                messageP.textContent = 'Error submitting request. Please try again.';
+                messageP.className = 'text-red-400 text-center mt-4';
+            }
+        });
+
+        document.getElementById('copy-address-btn').addEventListener('click', () => {
+            const address = document.getElementById('usdt-address').value;
+            const copySuccess = document.getElementById('copy-success');
+            const el = document.createElement('textarea');
+            el.value = address;
+            document.body.appendChild(el);
+            el.select();
+            try {
+                document.execCommand('copy');
+                copySuccess.classList.remove('hidden');
+                setTimeout(() => copySuccess.classList.add('hidden'), 2000);
+            } catch (err) {
+                console.error('Failed to copy text: ', err);
+                showMessage('Failed to copy. Please copy manually.', true);
+            }
+            document.body.removeChild(el);
+        });
+        
+        function populateModelSelect(priceMap) {
+            const selectEl = document.getElementById('order-model-select');
+            let html = '<option value="" data-price="0">Select Model...</option>';
+            for (const [model, price] of Object.entries(priceMap)) {
+                html += `<option value="${model}" data-price="${price}">${model} - $${price}</option>`;
+            }
+            selectEl.innerHTML = html;
+        }
+
+        document.getElementById('order-model-select').addEventListener('change', (e) => {
+            const selectedOption = e.target.options[e.target.selectedIndex];
+            const price = parseFloat(selectedOption.dataset.price);
+            currentPrice = (price > 0) ? price : 0;
+            document.getElementById('order-price').textContent = `$${currentPrice.toFixed(2)}`;
+            if (price > 0) document.getElementById('order-error').classList.add('hidden');
+        });
+
+        let currentService = null;
+        let currentPrice = 0;
+        
+        document.querySelectorAll('.order-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                // (UPDATED) Allow logged-out users to see price
+                
+                const modelTextDiv = document.getElementById('model-text-div');
+                const modelSelectDiv = document.getElementById('model-select-div');
+                const imeiDiv = document.getElementById('imei-div');
+                const serialDiv = document.getElementById('serial-number-div');
+                const downloadToolsDiv = document.getElementById('download-tools-div'); 
+                const modelTextInput = document.getElementById('order-model-text');
+                const modelSelectInput = document.getElementById('order-model-select');
+                const imeiInput = document.getElementById('order-imei');
+                const serialInput = document.getElementById('order-serial');
+                
+                currentService = btn.dataset.service;
+                
+                modelTextInput.required = false; modelSelectInput.required = false; imeiInput.required = false; serialInput.required = false;
+                modelTextDiv.classList.add('hidden'); modelSelectDiv.classList.add('hidden'); imeiDiv.classList.add('hidden'); serialDiv.classList.add('hidden'); downloadToolsDiv.classList.add('hidden'); 
+                
+                if (currentService === "iCloud Unlock") {
+                    imeiDiv.classList.remove('hidden'); modelSelectDiv.classList.remove('hidden');
+                    if(currentUser) { imeiInput.required = true; } // Only require if logged in
+                    modelSelectInput.required = true;
+                    populateModelSelect(icloudPriceMap);
+                    currentPrice = 0; modelSelectInput.value = ""; imeiInput.value = "";
+                } else if (currentService === "Carrier (SIM) Unlock") {
+                    imeiDiv.classList.remove('hidden'); modelSelectDiv.classList.remove('hidden');
+                    if(currentUser) { imeiInput.required = true; }
+                    modelSelectInput.required = true;
+                    populateModelSelect(carrierPriceMap);
+                    currentPrice = 0; modelSelectInput.value = ""; imeiInput.value = "";
+                } else if (currentService === "iCloud Bypass") {
+                    serialDiv.classList.remove('hidden'); modelSelectDiv.classList.remove('hidden'); downloadToolsDiv.classList.remove('hidden');
+                    if(currentUser) { serialInput.required = true; }
+                    modelSelectInput.required = true;
+                    populateModelSelect(bypassPriceMap); 
+                    currentPrice = 0; modelSelectInput.value = ""; serialInput.value = "";
+                } else {
+                    // Fallback for other services (if any)
+                    imeiDiv.classList.remove('hidden'); modelTextDiv.classList.remove('hidden');
+                    if(currentUser) { imeiInput.required = true; modelTextInput.required = true; }
+                    currentPrice = parseFloat(btn.dataset.price); 
+                    modelTextInput.value = ""; imeiInput.value = "";
+                }
+                
+                document.getElementById('order-service-name').textContent = currentService;
+                document.getElementById('order-price').textContent = `$${currentPrice.toFixed(2)}`;
+                document.getElementById('order-balance').textContent = `$${currentUserBalance.toFixed(2)}`;
+                document.getElementById('order-error').classList.add('hidden');
+                
+                showModal('order-modal');
+            });
+        });
+        
+        document.getElementById('order-modal-close').addEventListener('click', () => hideModal('order-modal'));
+        
+        document.getElementById('order-form').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            // (NEW) Check for login first
+            if (!currentUser) {
+                showMessage('Please login or register to place an order.', true);
+                hideModal('order-modal');
+                showModal('auth-modal');
+                return;
+            }
+
+            const errorDiv = document.getElementById('order-error');
+            let identifier, identifierType;
+            
+            if (currentService === 'iCloud Bypass') {
+                identifier = document.getElementById('order-serial').value; identifierType = 'serial';
+                if (!identifier || identifier.trim().length < 8) { errorDiv.textContent = 'Please enter a valid Serial Number.'; errorDiv.classList.remove('hidden'); return; }
+            } else {
+                identifier = document.getElementById('order-imei').value; identifierType = 'imei';
+                if (identifier.length !== 15 || !/^\d+$/.test(identifier)) { errorDiv.textContent = 'Please enter a valid 15-digit IMEI.'; errorDiv.classList.remove('hidden'); return; }
+            }
+
+            const isDropdownService = (currentService === 'iCloud Unlock' || currentService === 'Carrier (SIM) Unlock' || currentService === 'iCloud Bypass');
+            const model = isDropdownService ? document.getElementById('order-model-select').value : document.getElementById('order-model-text').value;
+
+            if (!model) { errorDiv.textContent = isDropdownService ? 'Please select a model.' : 'Please enter a model.'; errorDiv.classList.remove('hidden'); return; }
+            if (isDropdownService && currentPrice <= 0) { errorDiv.textContent = 'Please select a valid model from the list.'; errorDiv.classList.remove('hidden'); return; }
+            if (currentUserBalance < currentPrice) { errorDiv.textContent = 'Insufficient balance. Please add funds first.'; errorDiv.classList.remove('hidden'); return; }
+            
+            errorDiv.classList.add('hidden');
+            const confirmBtn = document.getElementById('confirm-order-btn');
+            confirmBtn.disabled = true; confirmBtn.textContent = 'Placing Order...';
+            
+            try {
+                // 1. Add to user's private collection
+                const ordersCollectionRef = collection(db, `/artifacts/${appId}/users/${currentUserId}/orders`);
+                const orderData = { service: currentService, price: currentPrice, [identifierType]: identifier, model: model, status: 'Pending', createdAt: serverTimestamp(), userId: currentUserId, userEmail: currentUser.email, reviewed: false };
+                const privateOrderDoc = await addDoc(ordersCollectionRef, orderData);
+
+                // 2. (NEW) Add to public collection for admin
+                const publicOrdersRef = collection(db, `/artifacts/${appId}/public/data/all_orders`);
+                // Add a reference to the private order doc ID so admin can update it
+                await addDoc(publicOrdersRef, { ...orderData, privateOrderId: privateOrderDoc.id });
+                
+                // 3. Deduct balance
+                const userProfileRef = doc(db, `/artifacts/${appId}/users/${currentUserId}/profile/data`);
+                await updateDoc(userProfileRef, { balance: increment(-currentPrice) });
+                
+                showMessage('Order placed successfully!');
+                hideModal('order-modal');
+                document.getElementById('order-form').reset();
+                
+            } catch (error) {
+                console.error('Error placing order:', error);
+                errorDiv.textContent = 'Failed to place order. Please try again.'; errorDiv.classList.remove('hidden');
+                showMessage('Failed to place order. Please try again.', true);
+            } finally {
+                confirmBtn.disabled = false; confirmBtn.textContent = 'Confirm & Place Order';
+            }
+        });
+
+        // (UPDATED) Review Form Submit Handler
+        document.getElementById('review-form').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            const errorDiv = document.getElementById('review-error');
+            const submitBtn = document.getElementById('submit-review-btn');
+            const orderSelect = document.getElementById('review-order-select');
+            
+            const orderDocId = orderSelect.value;
+            const selectedOption = orderSelect.options[orderSelect.selectedIndex];
+            const orderModelName = selectedOption ? selectedOption.dataset.model : null;
+            
+            const country = document.getElementById('review-country-select').value; // (UPDATED)
+            const comment = document.getElementById('review-comment').value;
+            const ratingInput = document.querySelector('input[name="rating"]:checked');
+            
+            if (!currentUserId || !currentUserProfile.name) { errorDiv.textContent = 'You must be logged in.'; errorDiv.classList.remove('hidden'); return; }
+            if (!orderDocId || !orderModelName) { errorDiv.textContent = 'Please select a completed order from the dropdown.'; errorDiv.classList.remove('hidden'); return; }
+            if (!country || country.trim() === '') { errorDiv.textContent = 'Please select your country.'; errorDiv.classList.remove('hidden'); return; } // (UPDATED)
+            if (!ratingInput) { errorDiv.textContent = 'Please select a star rating.'; errorDiv.classList.remove('hidden'); return; }
+            if (!comment || comment.trim() === '') { errorDiv.textContent = 'Please write a comment.'; errorDiv.classList.remove('hidden'); return; }
+            
+            errorDiv.classList.add('hidden');
+    
+            // (NEW) Also update profile country if it's different
+            if (currentUserProfile.country !== country) {
+                try {
+                    const userProfileRef = doc(db, `/artifacts/${appId}/users/${currentUserId}/profile/data`);
+                    await updateDoc(userProfileRef, { country: country });
+                } catch (err) { console.error("Error updating profile country:", err); }
+            }
+
+            submitBtn.disabled = true;
+            submitBtn.textContent = 'Submitting...';
+            
+            try {
+                // 1. (NEW) Save to "pending_reviews" collection for admin approval
+                const pendingReviewsRef = collection(db, `/artifacts/${appId}/public/data/pending_reviews`);
+                const reviewData = {
+                    userId: currentUserId,
+                    name: currentUserProfile.name,
+                    country: country,
+                    orderModel: orderModelName,
+                    rating: parseInt(ratingInput.value, 10),
+                    comment: comment,
+                    createdAt: serverTimestamp(),
+                    status: "Pending" // (NEW)
+                };
+                await addDoc(pendingReviewsRef, reviewData);
+                
+                // 2. Mark the original order as "reviewed" so it can't be reviewed again
+                const orderDocRef = doc(db, `/artifacts/${appId}/users/${currentUserId}/orders`, orderDocId);
+                await updateDoc(orderDocRef, { reviewed: true });
+                
+                showMessage('Review submitted for approval! Thank you.');
+                document.getElementById('review-form').reset();
+                document.getElementById('review-name').value = currentUserProfile.name;
+                document.getElementById('review-country-select').value = country;
+                
+                // Reset star ratings
+                const radioButtons = document.querySelectorAll('input[name="rating"]');
+                radioButtons.forEach(radio => radio.checked = false);
+                // Note: fetchOrderHistory will automatically re-run and remove this item from the dropdown.
+
+            } catch (error) {
+                console.error("Error submitting review: ", error);
+                errorDiv.textContent = 'Failed to submit review. Please try again.';
+                errorDiv.classList.remove('hidden');
+            } finally {
+                submitBtn.disabled = false;
+                submitBtn.textContent = 'Submit Review';
+            }
+        });
+        
+        
+        // --- (NEW) Gemini AI Helper ---
+        
+        // This function calls the Gemini API
+        async function callGeminiAPI(problem) {
+            const apiKey = ""; // API key is handled by the environment
+            const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-09-2025:generateContent?key=${apiKey}`;
+            
+            const systemPrompt = `
+                Tumi 'iFix Cloud' er ekjon helpful AI assistant. tomar kaj holo user-der iPhone-er shomossha shomadhane shahajjo kora.
+                
+                Amader 3-ti main service ache:
+                1. Official iCloud Unlock (Permanent, SIM kaj korbe, reset/update kora jabe)
+                2. iCloud Bypass (Wi-Fi only, SIM kaj korbe na, reset/update kora jabe na)
+                3. Carrier (SIM) Unlock (Jekono SIM use korar jonne)
+                
+                Tomake Google Search-er maddhome user-er problem-ti analyze korte hobe.
+                
+                CONDITION 1:
+                Jodi user 'iCloud', 'Activation Lock', 'Bypass' ba 'lock' shomporke proshno kore, tahole Google Search korar dorkar nei. Shorashori nicher ei BANGLA text-ti hুবহু (exactly) uttor hishebe dibe:
+                "আসসালামু আলাইকুম। আপনার iCloud লক থাকা ডিভাইসটি আনলক করার জন্য আমাদের কাছে দুটি পদ্ধতি রয়েছে: অফিসিয়াল পার্মানেন্ট আনলক এবং আইক্লাউড বাইপাস। নিচে দুটি পদ্ধতি সম্পর্কে বিস্তারিত আলোচনা করা হলো:
+                ১. অফিসিয়াল পার্মানেন্ট আনলক (Official Permanent Unlock)
+                এই পদ্ধতিতে আপনার ডিভাইসটি সম্পূর্ণভাবে আনলক করা হয় এবং এটি একটি নতুন ডিভাইসের মতোই ব্যবহারযোগ্য হয়ে ওঠে।
+                সুবিধা:
+                - যেকোনো দেশের সিম কার্ড ব্যবহার করতে পারবেন।
+                - ডিভাইস ফ্যাক্টরি রিসেট করতে পারবেন।
+                - iOS আপডেট করতে পারবেন কোনো সমস্যা ছাড়াই।
+                প্রয়োজনীয় শর্তাবলী:
+                - ডিভাইসটির ব্ল্যাকলিস্ট স্ট্যাটাস 'Clean' থাকতে হবে। (তবে, T-Mobile Non-Paid হলেও সমস্যা নেই)।
+                - ডিভাইসের লগ ইনফো (Log Info) ১.০০ থেকে ২০.০০ এর মধ্যে থাকতে হবে।
+                বিশেষ দ্রষ্টব্য: যদি আপনার ডিভাইসটি ব্ল্যাকলিস্টেড থাকে অথবা লগ ইনফো ২০.০০ এর উপরে হয়, তবে এটি অফিসিয়ালভাবে পার্মানেন্ট আনলক করা সম্ভব নয়। সেক্ষেত্রে আপনি দ্বিতীয় পদ্ধতিটি অর্থাৎ বাইপাস করতে পারেন।
+                ২. আইক্লাউড বাইপাস (iCloud Bypass)
+                যেসব ডিভাইস পার্মানেন্ট আনলকের শর্ত পূরণ করে না, সেগুলোর জন্য এটি একটি বিকল্প ব্যবস্থা।
+                সীমাবদ্ধতা:
+                - ডিভাইসে কোনো সিম কার্ড ব্যবহার করা যাবে না।
+                - ডিভাইস ফ্যাক্টরি রিসেট বা iOS আপডেট করা যাবে না। করলে ডিভাইসটি আবার লক হয়ে যাবে।
+                - শুধুমাত্র Wi-Fi ব্যবহার করে ইন্টারনেট ও অন্যান্য অ্যাপস চালাতে পারবেন।
+                শর্তাবলী:
+                - বাইপাসের জন্য বিশেষ কোনো শর্ত নেই। প্রায় যেকোনো ডিভাইস বাইপাস করা সম্ভব।
+                আপনার ডিভাইসটি কোন পদ্ধতির জন্য উপযুক্ত, তা কীভাবে জানবেন?
+                আপনার ডিভাইসের বর্তমান অবস্থা, অর্থাৎ এটি ব্ল্যাকলিস্টেড কিনা এবং এর লগ ইনফো কত, তা জানার জন্য রিপোর্ট প্রয়োজন। রিপোর্ট পেতে আমাদের ওয়েবসাইটের হোমপেজে থাকা "IMEI Check" অপশনে যান। সেখানে আপনার ডিভাইসের IMEI নম্বর এবং আপনার ব্যক্তিগত ইমেইল অ্যাড্রেস দিয়ে সাবমিট করুন।
+                আমরা ২৪ ঘণ্টার মধ্যে আপনার দেওয়া ইমেইলে রিপোর্টটি পাঠিয়ে দেব। অনুগ্রহ করে আপনার ইমেইলের স্প্যাম (Spam) বক্সও চেক করবেন।
+                এ বিষয়ে আরও কিছু জানার থাকলে আমাদের WhatsApp সাপোর্টে মেসেজ দিন।"
+                
+                CONDITION 2:
+                Jodi user 'Carrier', 'SIM Unlock', 'SIM not valid', ba 'network lock' shomporke proshno kore, tahole Google Search korar dorkar nei. Shorashori nicher ei BANGLA text-ti hুবহু (exactly) uttor hishebe dibe:
+                "'Carrier (SIM) Unlock' service-ti pawar jonne apnar device-ke obosshoi kichu shart puron korte hobe:
+                - ডিভাইসটির ব্ল্যাকলিস্ট স্ট্যাটাস 'Clean' থাকতে হবে। (তবে, T-Mobile Non-Paid হলেও সমস্যা নেই)।
+                - ডিভাইসের লগ ইনফো (Log Info) ১.০০ থেকে ২০.০০ এর মধ্যে থাকতে হবে।
+                Apni 'IMEI Check' section theke apnar device-er status report check korte paren."
+                
+                CONDITION 3 (All other problems):
+                Jodi user onno kono shomosshar kotha bole (e.g., "password vule gechi", "phone on hoy na", "Apple logo-te atke ache"), tahole Google Search use koro ebong nicher format-e BANGLA-te uttor dibe:
+                
+                **1. Diagnosis:** (Shomossha-ti ki? e.g., "Apnar phone-ti DFU mode-e ache.")
+                
+                **2. Our Service:** (Amader kon service-ti dorkar? e.g., "Ei shomosshar jonne amader 'iCloud Bypass' service-ti proyojon hote pare.") Jodi kono service proyojon na hoy, sheta sposto bole dibe.
+                
+                **3. Next Step:** (User-er ki kora uchit? e.g., "Apni amader 'iCloud Bypass' service-ti order korte paren, ba nicher steps-gulo follow kore phone restore korar cheshta korte paren: ...")
+            `;
+
+            const payload = {
+                contents: [{ parts: [{ text: problem }] }],
+                tools: [{ "google_search": {} }], // Enable Google Search
+                systemInstruction: {
+                    parts: [{ text: systemPrompt }]
+                },
+            };
+
+            try {
+                // Exponential backoff
+                let response;
+                let delay = 1000;
+                for (let i = 0; i < 3; i++) { // Retry up to 3 times
+                    response = await fetch(apiUrl, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify(payload)
+                    });
+
+                    if (response.ok) {
+                        break; // Success
+                    }
+                    
+                    if (response.status === 429 || response.status >= 500) {
+                        console.warn(`Gemini API call failed with status ${response.status}. Retrying in ${delay}ms...`);
+                        await new Promise(resolve => setTimeout(resolve, delay));
+                        delay *= 2; // Double the delay
+                    } else {
+                        // Don't retry on other errors (e.g., 400 Bad Request)
+                        throw new Error(`Gemini API Error: ${response.status} ${response.statusText}`);
+                    }
+                }
+                
+                if (!response.ok) {
+                    throw new Error(`Gemini API call failed after retries. Status: ${response.status}`);
+                }
+
+                const result = await response.json();
+                const candidate = result.candidates?.[0];
+                
+                if (candidate && candidate.content?.parts?.[0]?.text) {
+                    return candidate.content.parts[0].text;
+                } else {
+                    return "Error: Could not get a valid response from AI. Please try rephrasing your problem.";
+                }
+            } catch (error) {
+                console.error("Error calling Gemini API:", error);
+                return `Error: Could not connect to the AI helper. ${error.message}`;
+            }
+        }
+        
+        document.getElementById('diagnose-ai-btn').addEventListener('click', async () => {
+            const problemInput = document.getElementById('ai-problem-input');
+            const problem = problemInput.value.trim();
+            const resultDiv = document.getElementById('ai-result');
+            const resultContent = document.getElementById('ai-result-content');
+            const diagnoseBtn = document.getElementById('diagnose-ai-btn');
+
+            if (!problem) {
+                showMessage("Please describe your problem first.", true);
+                return;
+            }
+
+            // Show loading state
+            resultDiv.classList.remove('hidden');
+            resultContent.innerHTML = '<p class="text-gray-500">Analyzing your problem... Please wait.</p>';
+            diagnoseBtn.disabled = true;
+            diagnoseBtn.textContent = 'Diagnosing...';
+
+            // Call the API
+            const diagnosis = await callGeminiAPI(problem);
+
+            // Display the result
+            resultContent.innerHTML = diagnosis;
+            diagnoseBtn.disabled = false;
+            diagnoseBtn.textContent = 'Diagnose Now';
+        });
+
+
+        // --- App Initialization ---
+        function initializeAppOnLoad() {
+            try {
+                app = initializeApp(firebaseConfig);
+                db = getFirestore(app);
+                initAuth();
+                initNavigation(); 
+                fetchPublicReviews(); 
+                populateCountryDropdowns(); // (NEW)
+                console.log("Firebase App Initialized.");
+            } catch (e) {
+                console.error("Error initializing Firebase:", e);
+                document.body.innerHTML = '<div class="text-red-500 p-10">Error: Could not initialize Firebase. Please check your configuration.</div>';
+            }
+        }
+
+        window.onload = initializeAppOnLoad;
+
+    </script>
+
+    <!-- Background Animation Script -->
+    <script>
+        // Create particle effect
+        const particlesContainer = document.getElementById('particles-container');
+        const particleCount = 80;
+        
+        // Create particles
+        for (let i = 0; i < particleCount; i++) {
+            createParticle();
+        }
+        
+        function createParticle() {
+            const particle = document.createElement('div');
+            particle.className = 'particle';
+            
+            // Random size (small)
+            const size = Math.random() * 3 + 1;
+            particle.style.width = `${size}px`;
+            particle.style.height = `${size}px`;
+            
+            // Initial position
+            resetParticle(particle);
+            
+            particlesContainer.appendChild(particle);
+            
+            // Animate
+            animateParticle(particle);
+        }
+        
+        function resetParticle(particle) {
+            // Random position
+            const posX = Math.random() * 100;
+            const posY = Math.random() * 100;
+            
+            particle.style.left = `${posX}%`;
+            particle.style.top = `${posY}%`;
+            particle.style.opacity = '0';
+            
+            return {
+                x: posX,
+                y: posY
+            };
+        }
+        
+        function animateParticle(particle) {
+            // Initial position
+            const pos = resetParticle(particle);
+            
+            // Random animation properties
+            const duration = Math.random() * 10 + 10;
+            const delay = Math.random() * 5;
+            
+            // Animate
+            setTimeout(() => {
+                particle.style.transition = `all ${duration}s linear`;
+                particle.style.opacity = Math.random() * 0.3 + 0.1;
+                
+                // Move in a slight direction
+                const moveX = pos.x + (Math.random() * 20 - 10);
+                const moveY = pos.y - Math.random() * 30; // Move upwards
+                
+                particle.style.left = `${moveX}%`;
+                particle.style.top = `${moveY}%`;
+                
+                // Reset after animation completes
+                setTimeout(() => {
+                    animateParticle(particle);
+                }, duration * 1000);
+            }, delay * 1000);
+        }
+        
+        // Mouse interaction
+        document.addEventListener('mousemove', (e) => {
+            // Create particles at mouse position
+            const mouseX = (e.clientX / window.innerWidth) * 100;
+            const mouseY = (e.clientY / window.innerHeight) * 100;
+            
+            // Create temporary particle
+            const particle = document.createElement('div');
+            particle.className = 'particle';
+            
+            // Small size
+            const size = Math.random() * 4 + 2;
+            particle.style.width = `${size}px`;
+            particle.style.height = `${size}px`;
+            
+            // Position at mouse
+            particle.style.left = `${mouseX}%`;
+            particle.style.top = `${mouseY}%`;
+            particle.style.opacity = '0.6';
+            
+            particlesContainer.appendChild(particle);
+            
+            // Animate outward
+            setTimeout(() => {
+                particle.style.transition = 'all 2s ease-out';
+                particle.style.left = `${mouseX + (Math.random() * 10 - 5)}%`;
+                particle.style.top = `${mouseY + (Math.random() * 10 - 5)}%`;
+                particle.style.opacity = '0';
+                
+                // Remove after animation
+                setTimeout(() => {
+                    particle.remove();
+                }, 2000);
+            }, 10);
+            
+            // Subtle movement of gradient spheres
+            const spheres = document.querySelectorAll('.gradient-sphere');
+            const moveX = (e.clientX / window.innerWidth - 0.5) * 5;
+            const moveY = (e.clientY / window.innerHeight - 0.5) * 5;
+            
+            spheres.forEach(sphere => {
+                const currentTransform = getComputedStyle(sphere).transform;
+                sphere.style.transform = `translate(${moveX}px, ${moveY}px)`;
+            });
+        });
+    </script>
 </body>
-</html> 
+</html>
+
